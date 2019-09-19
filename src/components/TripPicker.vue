@@ -2,9 +2,20 @@
   <div class="book">
     <div class="card">
       <div class="card-content">
-        <h3 class="title">Book unique places to do an unforgettable trip.</h3>
+        <h3 class="title">Book unique places to do an unforgettable trips.</h3>
         <b-field label="Where">
-          <b-input placeholder="Tenerife..." type="search" icon="magnify" size="is-medium"></b-input>
+          <b-autocomplete
+            size="is-medium"
+            v-model="name"
+            :data="filteredDataArray"
+            placeholder="e.g. Puerto de la Cruz"
+            :keep-first="true"
+            :open-on-focus="true"
+            icon="magnify"
+            @select="option => selected = option"
+          >
+            <template slot="empty">No results found</template>
+          </b-autocomplete>
         </b-field>
         <b-field label="Select a date">
           <b-datepicker
@@ -15,10 +26,10 @@
             size="is-medium"
           ></b-datepicker>
         </b-field>
-          <b-field label="Guest">
-            <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
-          </b-field>
-
+        <b-field label="Guest">
+          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
+        </b-field>
+        <b-button class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
     </div>
   </div>
@@ -72,20 +83,36 @@ export default {
           type: "is-info"
         }
       ],
+      sites: ["Puerto de la Cruz", "Teno", "Taganana", "Teide"],
+      name: "",
+      selected: null,
       date: "",
       guest: 1
     };
   },
 
-  methods: {
+  methods: {},
+
+  computed: {
+    filteredDataArray() {
+      return this.sites.filter(option => {
+        return (
+          option
+            .toString()
+            .toLowerCase()
+            .indexOf(this.name.toLowerCase()) >= 0
+        );
+      });
+    }
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .book {
   background-color: beige;
-  width: 441px;
+  width: 411px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 h3 {
@@ -99,13 +126,20 @@ h3 {
   justify-content: center;
   align-items: center;
   height: 475px;
+  padding: 0px;
 }
 
-.b-button {
-  margin-top: 20px;
-}
-
-.separed {
+.margin-top {
   margin-top: 15px;
+}
+
+@media only screen and (max-width: 450px) {
+  .book {
+    background-color: beige;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0px;
+    margin-top: 25vw;
+  }
 }
 </style>

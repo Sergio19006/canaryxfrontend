@@ -1,14 +1,13 @@
 <template>
   <div class="body">
     <div class="container">
-      <TripPicker/>
+      <TripPicker />
     </div>
   </div>
 </template>
 
 <script>
-
-import TripPicker from '../components/TripPicker';
+import TripPicker from "../components/TripPicker";
 
 export default {
   props: {
@@ -21,24 +20,20 @@ export default {
 
   components: {
     TripPicker
-  },
-
-  
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .body {
   width: 100vw;
   height: 50vw;
-  background-image: url("../assets/teide.png");
+  background-image: url("../assets/teide.jpg");
   background-repeat: no-repeat;
   background-size: 100%, auto;
-
 }
 
 .container {
-  padding-top: 50px;
+  padding: 50px 0px 0px 0px;
 }
-
 </style>

@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <Navbar/>
-    <Explorer msg="Welcome to Your Vue.js App" />
-
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Explorer from './views/Explorer';
 import Navbar from './components/Navbar';
 
 export default {
   name: "app",
   components: {
-    Explorer,
     Navbar
   }
 };
@@ -21,8 +18,11 @@ export default {
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all";
+#app {
+  width: 100%;
+}
 // Set your colors
-$primary: #8c67ef;
+$primary: #e2725b;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);
