@@ -3,41 +3,34 @@
     <div class="card">
       <div class="card-content">
         <h3 class="title">Book unique places to do an anforgettable trip.</h3>
-        <b-field label="Where">
-          <b-autocomplete
-            size="is-medium"
-            v-model="name"
-            :data="filteredDataArray"
-            placeholder="e.g. Puerto de la Cruz"
-            :keep-first="true"
-            :open-on-focus="true"
-            icon="magnify"
-            @select="option => selected = option"
-          >
-            <template slot="empty">No results found</template>
-          </b-autocomplete>
-        </b-field>
-        <b-field label="Select a date">
-          <b-datepicker
-            placeholder="Click to select..."
-            v-model="date"
-            :events="events"
-            icon="calendar-today"
-            size="is-medium"
-          ></b-datepicker>
-        </b-field>
+        <div>
+          <b-field label="Where">
+            <b-autocomplete
+              size="is-medium"
+              v-model="name"
+              :data="filteredDataArray"
+              placeholder="e.g. Puerto de la Cruz"
+              :keep-first="true"
+              :open-on-focus="true"
+              icon="magnify"
+              @select="option => selected = option"
+            >
+              <template slot="empty">No results found</template>
+            </b-autocomplete>
+          </b-field>
+          <b-field label="Select a date" class="datapicker">
+            <b-datepicker
+              placeholder="Click to select..."
+              v-model="date"
+              :events="events"
+              icon="calendar-today"
+              size="is-medium"
+            ></b-datepicker>
+          </b-field>
+        </div>
         <b-field label="Guests">
           <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
         </b-field>
-        <!-- <b-field label="Adults">
-          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
-        </b-field>
-        <b-field label="Clildrens">
-          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
-        </b-field>
-        <b-field label="Canary Residents">
-          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
-        </b-field> -->
         <b-button class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
     </div>
@@ -130,10 +123,7 @@ h3 {
 
 .card {
   border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-radius: 6px;
 }
 
 .card-content {

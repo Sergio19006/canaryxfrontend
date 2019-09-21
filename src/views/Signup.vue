@@ -47,9 +47,8 @@ export default {};
 <style lang="scss" scoped>
 .body {
   width: 100vw;
-  height: 50vw;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url("../assets/mercedes.jpg");
+  height: 48vw;
+  background-image: url("../assets/mercedes.jpg");
   background-repeat: no-repeat;
   background-size: 100%, auto;
 }

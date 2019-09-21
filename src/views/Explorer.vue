@@ -34,7 +34,7 @@ export default {
 <style lang="scss" scoped>
 .body {
   width: 100vw;
-  height: 50vw;
+  height: 45vw;
   background-image: url("../assets/teide.jpg");
   background-repeat: no-repeat;
   background-size: 100%, auto;
