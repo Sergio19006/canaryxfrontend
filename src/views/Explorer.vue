@@ -1,13 +1,19 @@
 <template>
-  <div class="body">
+  <div>
+    <div class="body">
+      <div class="container">
+        <TripPicker />
+      </div>
+    </div>
     <div class="container">
-      <TripPicker />
+      <PrincipalsTrips />
     </div>
   </div>
 </template>
 
 <script>
 import TripPicker from "../components/TripPicker";
+import PrincipalsTrips from "../components/PrincipalsTrips";
 
 export default {
   props: {
@@ -19,7 +25,8 @@ export default {
   },
 
   components: {
-    TripPicker
+    TripPicker,
+    PrincipalsTrips
   }
 };
 </script>

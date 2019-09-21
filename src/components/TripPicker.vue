@@ -2,7 +2,7 @@
   <div class="book">
     <div class="card">
       <div class="card-content">
-        <h3 class="title">Book unique places to do an unforgettable trips.</h3>
+        <h3 class="title">Book unique places to do an anforgettable trip.</h3>
         <b-field label="Where">
           <b-autocomplete
             size="is-medium"
@@ -26,9 +26,18 @@
             size="is-medium"
           ></b-datepicker>
         </b-field>
-        <b-field label="Guest">
+        <b-field label="Guests">
           <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
         </b-field>
+        <!-- <b-field label="Adults">
+          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
+        </b-field>
+        <b-field label="Clildrens">
+          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
+        </b-field>
+        <b-field label="Canary Residents">
+          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
+        </b-field> -->
         <b-button class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
     </div>
@@ -110,7 +119,6 @@ export default {
 
 <style lang="scss" scoped>
 .book {
-  background-color: beige;
   width: 411px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -118,6 +126,14 @@ export default {
 h3 {
   text-align: center;
   padding-bottom: 20px;
+}
+
+.card {
+  border: 1px solid transparent;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .card-content {

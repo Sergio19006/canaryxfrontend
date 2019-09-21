@@ -5,7 +5,6 @@
         <form class="form">
           <div class="modal-card" style="width: auto">
             <header class="modal-card-head">
-              <!-- <p class="modal-card-title">Login</p> -->
               <h3 class="title">Login</h3>
             </header>
             <section class="modal-card-body">
@@ -51,7 +50,7 @@ export default {};
 
 .left {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 3%;
 }
 
@@ -71,7 +70,6 @@ export default {};
 .modal-card-head {
   justify-content: center;
 }
-
 @media only screen and (max-width: 450px) {
   .form {
     margin-top: 35vw;
