@@ -39,6 +39,11 @@
         </div>
       </div>
     </section>
+    <section>
+      <div class="container">
+        <GoogleMapsClients />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -46,6 +51,7 @@
 import Collage from "../components/Collage";
 import Book from "../components/Book";
 import Conditions from "../components/Conditions";
+import GoogleMapsClients from "../components/GoogleMapsClients";
 
 export default {
   data: () => {
@@ -60,7 +66,8 @@ export default {
   components: {
     Collage,
     Book,
-    Conditions
+    Conditions,
+    GoogleMapsClients
   }
 };
 </script>

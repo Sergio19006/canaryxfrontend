@@ -2,6 +2,14 @@ import Vue from 'vue';
 import App from './App.vue';
 import Buefy from 'buefy';
 import router from './routes/index';
+import * as VueGoogleMaps from "vue2-google-maps";
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "",
+    libraries: "places"
+  }
+});
 
 Vue.use(Buefy);
 
