@@ -8,7 +8,10 @@
     <section>
       <div class="container">
         <div class="columns">
-          <div class="column is-5">
+          <div class="column is-5 trip-title">
+            <figure class="image is-64x64">
+              <img class="is-rounded" src="../assets/thomas.png" />
+            </figure>
             <h1 class="title">Aqui empieza la descripción de la exxxxxxxxxxxxcursiooonasaaa</h1>
             <h2 class="subtitle">Excursión al teide organizada por Tui</h2>
           </div>
@@ -41,17 +44,34 @@
     </section>
     <section>
       <div class="container">
-        <GoogleMapsClients />
+        <div class="maps">
+          <GoogleMapsClients />
+        </div>
+      </div>
+    </section>
+    <section>
+      <br />
+      <div class="container">
+        <div class="columns">
+          <div class="column is-9">
+            <Reviews />
+          </div>
+          <div class="column is-3 similar">
+            <SimilarTrips />
+          </div>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import Collage from "../components/Collage";
-import Book from "../components/Book";
-import Conditions from "../components/Conditions";
-import GoogleMapsClients from "../components/GoogleMapsClients";
+import Collage from "../components/Trip/Collage";
+import Book from "../components/Trip/Book";
+import Conditions from "../components/Trip/Conditions";
+import GoogleMapsClients from "../components/Trip/GoogleMapsClients";
+import Reviews from "../components/Trip/Reviews";
+import SimilarTrips from "../components/Trip/SimilarTrips";
 
 export default {
   data: () => {
@@ -67,7 +87,9 @@ export default {
     Collage,
     Book,
     Conditions,
-    GoogleMapsClients
+    GoogleMapsClients,
+    Reviews,
+    SimilarTrips
   }
 };
 </script>
@@ -76,4 +98,17 @@ export default {
 .columns {
   margin: 3% 0%;
 }
+
+.maps {
+  margin: auto;
+}
+
+.similar {
+  padding-top: 0px;
+}
+
+.trip-title{
+
+}
+
 </style>

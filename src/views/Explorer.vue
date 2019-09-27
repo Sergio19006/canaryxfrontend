@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import TripPicker from "../components/TripPicker";
-import PrincipalsTrips from "../components/PrincipalsTrips";
+import TripPicker from "../components/Explorer/TripPicker";
+import PrincipalsTrips from "../components/Explorer/PrincipalsTrips";
 
 export default {
   props: {

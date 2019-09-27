@@ -3,32 +3,32 @@
     <div class="grid-container">
       <div class="top-left">
         <figure class="image is-4by3">
-          <img src="../assets/6.jpg" alt />
+          <img src="../../assets/6.jpg" alt />
         </figure>
       </div>
       <div class="top-rigth">
         <figure class="image is-4by3">
-          <img src="../assets/6.jpg" alt />
+          <img src="../../assets/6.jpg" alt />
         </figure>
       </div>
       <div class="top-more-rigth">
         <figure class="image is-4by3">
-          <img src="../assets/6.jpg" alt />
+          <img src="../../assets/6.jpg" alt />
         </figure>
       </div>
       <div class="bottom-rigth">
         <figure class="image is-4by3">
-          <img src="../assets/6.jpg" alt />
+          <img src="../../assets/6.jpg" alt />
         </figure>
       </div>
       <div class="bottom-left">
         <figure class="image is-4by3">
-          <img src="../assets/6.jpg" alt />
+          <img src="../../assets/6.jpg" alt />
         </figure>
       </div>
       <div class="bottom-more-left">
         <figure class="image is-4by3">
-          <img src="../assets/6.jpg" alt />
+          <img src="../../assets/6.jpg" alt />
         </figure>
       </div>
     </div>
@@ -70,6 +70,7 @@ export default {};
 
 .bottom-rigth {
   grid-area: bottom-rigth;
+  margin-top: 6.5px;
 }
 
 .bottom-left {

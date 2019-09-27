@@ -88,7 +88,7 @@ export default {
       sites: ["Puerto de la Cruz", "Teno", "Taganana", "Teide"],
       name: "",
       selected: null,
-      date: "",
+      date: [],
       guest: 1
     };
   },

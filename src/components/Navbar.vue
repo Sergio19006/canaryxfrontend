@@ -1,5 +1,5 @@
 <template>
-  <b-navbar transparent="true">
+  <b-navbar>
       <template slot="brand">
         <router-link to="/">
         <figure class="image is-128x64">
