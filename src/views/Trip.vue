@@ -54,7 +54,10 @@
       <div class="container">
         <div class="columns">
           <div class="column is-9">
-            <Reviews />
+            <Reviews :show="false" />
+            <Reviews :show="true" response="standard dummy text ever since the 
+            1500s, when an unknown printer took a galley of type and scrambled it 
+            to make a type specimen book"/>
           </div>
           <div class="column is-3 similar">
             <SimilarTrips />

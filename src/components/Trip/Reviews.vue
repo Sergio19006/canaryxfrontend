@@ -3,13 +3,13 @@
     <div class="columns review">
       <div class="column is-2">
         <div class="profile">
-          <figure class="image is-96x96">
+          <figure class="image is-64x64">
             <img class="is-rounded" src="../../assets/perfil.jpg" />
           </figure>
           <div class="subtitle">Sergio</div>
         </div>
       </div>
-      <div class="column is-10">
+      <div class="column is-9">
         <div class="rating">
           <b-icon v-for="item in 5" :key="item" icon="star" size="is-small"></b-icon>
         </div>
@@ -21,10 +21,11 @@
           printer took a galley of type
           and scrambled it to make a type specimen book
         </div>
-        <div class="columns">
-          <div class="column response">
+        <div class="columns response">
+          <div v-if="!show" class="column text-area">
             <b-field>
               <b-input
+                v-model="response"
                 type="textarea"
                 minlength="10"
                 maxlength="300"
@@ -33,6 +34,12 @@
             </b-field>
             <button @click="addResponse" class="button">Response</button>
           </div>
+          <div v-if="show" class="column is-2">
+            <figure class="image is-64x64">
+              <img class="is-rounded" src="../../assets/thomas.png" />
+            </figure>
+          </div>
+          <div v-if="show" class="column is-10 mess">{{response}}</div>
         </div>
       </div>
     </div>
@@ -41,19 +48,20 @@
 
 <script>
 export default {
+  props: {
+    show: Boolean,
+    response: String
+  },
+
   data: () => {
     return {
-      response: ""
+      //response: ""
     };
   },
   methods: {
-    addResponse() {
-      const response = document.querySelector(".response").replaceWith;
-      console.log("hola", response);
-    },
-
-    extendInput() {
-      document.querySelector(".input-response").classList.add();
+    addResponse(id) {
+      this.show = true;
+      //Send to back
     }
   }
 };
@@ -67,12 +75,11 @@ export default {
   flex-direction: column;
 }
 
-.review {
-  box-shadow: 1px -1px 16px -1px rgba(0, 0, 0, 0.25);
-  background-color: beige;
-}
-
 .subtitle {
   margin-top: 2%;
+}
+
+.mess {
+  margin-top: 3%;
 }
 </style>
