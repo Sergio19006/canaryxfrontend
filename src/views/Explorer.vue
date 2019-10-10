@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="body">
-      <div class="container">
+      <div class="container pick">
         <TripPicker />
       </div>
     </div>
-    <div class="container">
+
+    <div class="container principal">
       <PrincipalsTrips />
     </div>
   </div>
@@ -38,6 +39,7 @@ export default {
   background-image: url("../assets/teide.jpg");
   background-repeat: no-repeat;
   background-size: 100%, auto;
+  min-height: 600px;
 }
 
 .container {

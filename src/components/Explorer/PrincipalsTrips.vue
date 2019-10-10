@@ -55,9 +55,4 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@media only screen and (max-width: 450px) {
-  .main {
-    margin-top: 100%;
-  }
-}
 </style>

@@ -59,9 +59,8 @@ export default {
     };
   },
   methods: {
-    addResponse(id) {
+     addResponse() {
       this.show = true;
-      //Send to back
     }
   }
 };

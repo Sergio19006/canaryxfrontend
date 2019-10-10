@@ -110,8 +110,4 @@ export default {
   padding-top: 0px;
 }
 
-.trip-title{
-
-}
-
 </style>

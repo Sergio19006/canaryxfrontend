@@ -112,7 +112,7 @@ export default {
 
 <style lang="scss" scoped>
 .book {
-  width: 411px;
+  max-width: 411px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -142,10 +142,14 @@ h3 {
 @media only screen and (max-width: 450px) {
   .book {
     background-color: beige;
-    width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-width: 100%;
     padding: 0px;
     margin-top: 25vw;
+  }
+
+  .pick{
+    justify-content: center;
+
   }
 }
 </style>
