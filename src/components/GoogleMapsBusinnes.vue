@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2>Search and add a pin</h2>
+      <h2>Search and add a location for the trip</h2>
       <label>
         <gmap-autocomplete
           @place_changed="setPlace">
@@ -32,8 +32,6 @@ export default {
   name: "GoogleMap",
   data() {
     return {
-      // default to Montreal to keep it simple
-      // change this to whatever makes sense
       center: { lat: 45.508, lng: -73.587 },
       markers: [],
       places: [],
@@ -46,7 +44,6 @@ export default {
   },
 
   methods: {
-    // receives a place object via the autocomplete component
     setPlace(place) {
       this.currentPlace = place;
     },

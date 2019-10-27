@@ -29,7 +29,7 @@
           </b-field>
         </div>
         <b-field label="Guests">
-          <b-numberinput @click="a()" v-model="guest" min="0" controls-rounded></b-numberinput>
+          <b-numberinput v-model="guest" min="0" controls-rounded></b-numberinput>
         </b-field>
         <b-button class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
