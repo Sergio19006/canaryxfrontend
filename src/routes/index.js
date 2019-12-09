@@ -6,6 +6,7 @@ import Signup from '../views/Signup';
 import Trip from '../views/Trip';
 import Experience from '../views/Experience';
 import NewTrip from '../views/NewTrip';
+import Admin from '../views/Admin';
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,7 @@ const routes = [
   { path: '/trip', component: Trip },
   { path: '/experience', component: Experience },
   { path: '/newtrip', component: NewTrip },
+  { path: '/admin', component: Admin },
 ]
 export default new VueRouter({ routes });
 

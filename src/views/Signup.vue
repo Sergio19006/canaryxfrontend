@@ -9,12 +9,19 @@
             </header>
             <section class="modal-card-body">
               <b-field label="Email">
-                <b-input type="email" :value="email" placeholder="Your email" required></b-input>
+                <b-input
+                  type="email"
+                  :value="email"
+                  placeholder="Your email"
+                  v-model="email"
+                  required
+                ></b-input>
               </b-field>
               <b-field label="Password">
                 <b-input
                   type="password"
                   :value="password"
+                  v-model="password"
                   password-reveal
                   placeholder="Your password"
                   required
@@ -24,11 +31,31 @@
                 <b-input
                   type="password"
                   :value="password"
+                  v-model="repeatPass"
                   password-reveal
                   placeholder="Repeat Your password"
                   required
                 ></b-input>
               </b-field>
+              <div class="business">
+                <b-field>
+                  <b-switch @click.native="isBusiness()" v-model="business">Business</b-switch>
+                </b-field>
+              </div>
+              <div class="div-logo hidden">
+                <b-field class="file">
+                  <b-upload v-model="file">
+                    <a class="button is-primary">
+                      <b-icon icon="upload"></b-icon>
+                      <span>Click to upload the logo</span>
+                    </a>
+                  </b-upload>
+                  <span class="file-name" v-if="file">{{ file.name }}</span>
+                </b-field>
+                <b-field class="description" label="Business description">
+                  <b-input maxlength="200" type="textarea"></b-input>
+                </b-field>
+              </div>
             </section>
             <footer class="modal-card-foot">
               <button class="button is-primary">Sign up</button>
@@ -41,7 +68,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => {
+    return {
+      business: false,
+      email: "",
+      password: "",
+      repeatPass: "",
+      file: null
+    };
+  },
+
+  methods: {
+    isBusiness() {
+      document.querySelector(".div-logo").classList.toggle("hidden");
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +94,31 @@ export default {};
   background-image: url("../assets/mercedes.jpg");
   background-repeat: no-repeat;
   background-size: 100%, auto;
+}
+
+.description {
+  width: 100%;
+}
+
+.file {
+  padding-top: 5%;
+}
+
+.div-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hidden {
+  //transform: scale(0, 0);
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .left {

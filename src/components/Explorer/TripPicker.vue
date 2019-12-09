@@ -31,13 +31,14 @@
         <b-field label="Guests">
           <b-numberinput v-model="guest" min="0" controls-rounded></b-numberinput>
         </b-field>
-        <b-button class="margin-top" type="is-primary" outlined>Find a trip</b-button>
+        <b-button  @click="formatDate()" class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 const thisMonth = new Date().getMonth();
 const thisYear = new Date().getFullYear();
 export default {
@@ -93,7 +94,11 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    formatDate(){
+      console.log(moment(this.date).format('DD-MM-YYYY'));
+    }
+  },
 
   computed: {
     filteredDataArray() {

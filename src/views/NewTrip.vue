@@ -49,10 +49,11 @@
               </div>
               <div class="column is-4">
                 <b-field label="Guide">
-                  <b-input size="is-medium" v-model="Guide"></b-input>
+                  <b-input size="is-medium" v-model="guide"></b-input>
                 </b-field>
                 <b-field label="Select a date">
                   <b-datepicker
+                    v-model="date"
                     size="is-medium"
                     placeholder="Click to select..."
                     icon="calendar-today"
@@ -98,7 +99,14 @@
             </div>
           </div>
         </div>
-        <div class="conditions">
+        <div class="columns">
+          <div class="column is-4">
+            <b-field label="Place">
+              <b-input size="is-medium" v-model="place"></b-input>
+            </b-field>
+          </div>
+        </div>
+        <div class="conditions column">
           <b-field label="Conditions">
             <b-input v-model="condition" size="is-medium"></b-input>
           </b-field>
@@ -107,6 +115,7 @@
             <li v-for="cond in conditions" v-bind:key="cond">{{ cond }}</li>
           </ul>
         </div>
+
         <div class="content maps">
           <GoogleMaps />
         </div>
@@ -122,7 +131,7 @@ export default {
     return {
       types: ["Walk", "Sea", "Experience"],
       numberOfPersons: 15,
-      Guide: "",
+      guide: "",
       type: "",
       selected: null,
       isAmPm: true,
@@ -141,7 +150,9 @@ export default {
       Transport: false,
       Lunch: false,
       condition: "",
-      conditions: []
+      conditions: [],
+      place: "",
+      date:""
     };
   },
   computed: {
@@ -165,7 +176,9 @@ export default {
         );
       });
     },
+    // eslint-disable-next-line
     deleteDropFile(index) {
+      // eslint-disable-next-line
       this.dropFiles.splice(index, 1);
     },
     format() {
@@ -207,12 +220,11 @@ export default {
   background-color: white;
   margin-top: 100px;
 }
-.maps{
+.maps {
   width: 95%;
   height: 95%;
   padding-bottom: 25px;
   margin: auto;
-
 }
 
 .conditions {
