@@ -196,7 +196,7 @@ export default {
       let data = new FormData();
       for(let img of this.dropFiles)
         data.append('img', img, img.name);
-      const response = await axios.post('http://localhost:3000/api/v1/trips/upload',data);
+      const response = await axios.post('http://localhost:3000/api/v1/trips/addTrip',data);
     }
   },
   components: {
