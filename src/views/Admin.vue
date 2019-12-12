@@ -23,7 +23,7 @@ import AdminTrip from '../components/Admin/AdminTrip';
 import Menu from '../components/Admin/Menu';
 export default {
   
-  components:{
+  components: {
     AdminTrip,
     Menu
   }

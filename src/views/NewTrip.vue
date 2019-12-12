@@ -119,6 +119,7 @@
         <div class="content maps">
           <GoogleMaps />
         </div>
+        <button @click="sendFiles()" >Enviar rollo</button>
       </div>
     </div>
   </div>
@@ -126,6 +127,7 @@
 
 <script>
 import GoogleMaps from "../components/GoogleMapsBusinnes";
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -189,6 +191,12 @@ export default {
     addCondition() {
       this.conditions.push(this.condition);
       this.condition = "";
+    },
+    async sendFiles(){
+      let data = new FormData();
+      for(let img of this.dropFiles)
+        data.append('img', img, img.name);
+      const response = await axios.post('http://localhost:3000/api/v1/trips/upload',data);
     }
   },
   components: {
