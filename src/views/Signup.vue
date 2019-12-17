@@ -53,12 +53,12 @@
                   <span class="file-name" v-if="file">{{ file.name }}</span>
                 </b-field>
                 <b-field class="description" label="Business description">
-                  <b-input maxlength="200" type="textarea"></b-input>
+                  <b-input v-model="description" maxlength="200" type="textarea"></b-input>
                 </b-field>
               </div>
             </section>
             <footer class="modal-card-foot">
-              <button class="button is-primary">Sign up</button>
+              <button @click="singupHandle()" class="button is-primary">Sign up</button>
             </footer>
           </div>
         </form>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data: () => {
     return {
@@ -75,13 +76,24 @@ export default {
       email: "",
       password: "",
       repeatPass: "",
-      file: null
+      file: null,
+      description:''
     };
   },
 
   methods: {
     isBusiness() {
       document.querySelector(".div-logo").classList.toggle("hidden");
+    },
+    async singupHandle(){
+      let data = new FormData();
+      data.append('img', this.file, this.file.name);
+      data.append('business', this.business);
+      data.append('email',this.email);
+      data.append('password', this.password);
+      data.append('repeatPPassword', this.repeatPass);
+      data.append('description',this.description)
+      await axios.post('http://localhost:3000/api/v1/users/signup',data);
     }
   }
 };

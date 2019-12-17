@@ -19,5 +19,8 @@ const routes = [
   { path: '/newtrip', component: NewTrip },
   { path: '/admin', component: Admin },
 ]
-export default new VueRouter({ routes });
+export default new VueRouter({ 
+  routes,
+  mode: 'history' 
+});
 
