@@ -96,6 +96,7 @@ export default {
 
   methods: {
     formatDate(){
+      // eslint-disable-next-line
       console.log(moment(this.date).format('DD-MM-YYYY'));
     }
   },
@@ -137,7 +138,7 @@ h3 {
   justify-content: center;
   align-items: center;
   height: 475px;
-  padding: 0px;
+  padding: 0.5rem;
 }
 
 .margin-top {

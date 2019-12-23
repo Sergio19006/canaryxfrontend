@@ -15,9 +15,12 @@
 <script>
 export default {
   name: "GoogleMap",
+  props:{
+    coordenates: String
+  },
   data() {
     return {
-      center: { lat: 45.508, lng: -73.587 },
+      center: {},
       markers: [],
       places: [],
       currentPlace: null
@@ -25,9 +28,10 @@ export default {
   },
 
   mounted() {
-    this.currentPlace = { lat: 28.2723384, lng: -16.64250800000002 };
+    this.currentPlace = this.coordenates;
+    this.center = { lat: 28.2723384, lng: -16.64250800000002 }
     this.geolocate();
-    setTimeout(this.addMarker, 1);
+    setTimeout(this.addMarker, 100);
   },
 
   methods: {

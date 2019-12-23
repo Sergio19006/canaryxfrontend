@@ -5,7 +5,6 @@
         <TripPicker />
       </div>
     </div>
-
     <div class="container principal">
       <PrincipalsTrips />
     </div>

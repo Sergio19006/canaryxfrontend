@@ -2,26 +2,32 @@
   <div class="body">
     <div class="margin">
       <div class="container content">
-        <div class="columns">
+        <div class="columns margin">
           <div class="column is-8">
-            <b-field label="Title">
-              <b-input placeholder="e.g. Teide Trip" size="is-large"></b-input>
-            </b-field>
-            <b-field label="Type">
-              <b-autocomplete
-                size="is-large"
-                v-model="type"
-                :data="filteredTypes"
-                placeholder="e.g. Walk"
-                :keep-first="true"
-                :open-on-focus="true"
-                @select="option => selected = option"
-              >
-                <template slot="empty">No results found</template>
-              </b-autocomplete>
-            </b-field>
             <div class="columns">
-              <div class="column is-6">
+              <div class="column is-6 big-input">
+                <b-field label="Title">
+                  <b-input placeholder="e.g. Teide Trip" size="is-large"></b-input>
+                </b-field>
+              </div>
+              <div class="column is-6 big-input">
+                <b-field label="Type">
+                  <b-autocomplete
+                    size="is-large"
+                    v-model="type"
+                    :data="filteredTypes"
+                    placeholder="e.g. Walk"
+                    :keep-first="true"
+                    :open-on-focus="true"
+                    @select="option => selected = option"
+                  >
+                    <template slot="empty">No results found</template>
+                  </b-autocomplete>
+                </b-field>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column flex is-6">
                 <b-field label="Numbers of persons">
                   <b-numberinput v-model="numberOfPersons" min="0"></b-numberinput>
                 </b-field>
@@ -47,7 +53,7 @@
                   </b-autocomplete>
                 </b-field>
               </div>
-              <div class="column is-4">
+              <div class="column flex is-6">
                 <b-field label="Guide">
                   <b-input size="is-medium" v-model="guide"></b-input>
                 </b-field>
@@ -65,7 +71,8 @@
               </div>
             </div>
           </div>
-          <div class="column is-4">
+          <div class=" flex is-6.
+          ">
             <div class="inline">
               <div class="field">
                 <b-switch v-model="Transport">Transport</b-switch>
@@ -75,7 +82,7 @@
               </div>
             </div>
 
-            <b-field>
+            <b-field class="margin">
               <b-upload v-model="dropFiles" multiple drag-drop>
                 <section class="section">
                   <div class="content has-text-centered">
@@ -100,13 +107,13 @@
           </div>
         </div>
         <div class="columns">
-          <div class="column is-4">
+          <div class="column flex is-4">
             <b-field label="Place">
               <b-input size="is-medium" v-model="place"></b-input>
             </b-field>
           </div>
         </div>
-        <div class="conditions column">
+        <div class="conditions column flex">
           <b-field label="Conditions">
             <b-input v-model="condition" size="is-medium"></b-input>
           </b-field>
@@ -119,14 +126,17 @@
         <div class="content maps">
           <GoogleMaps />
         </div>
-        <button @click="sendFiles()" >Enviar rollo</button>
+        <div class="conditions margin">
+            <button class="button is-primary is-medium " @click="sendFiles()" >Add Trip</button>
+        </div>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import GoogleMaps from "../components/GoogleMapsBusinnes";
+import GoogleMaps from "../components/Admin/GoogleMapsBusinnes";
 import axios from 'axios';
 export default {
   data() {
@@ -196,7 +206,7 @@ export default {
       let data = new FormData();
       for(let img of this.dropFiles)
         data.append('img', img, img.name);
-      await axios.post('http://localhost:3000/api/v1/trips/addTrip',data);
+      await axios.post('http://localhost:3000/api/v1/trips/addTrip', data);
     }
   },
   components: {
@@ -212,13 +222,13 @@ export default {
 .body {
   width: 100vw;
   background-image: url("../assets/newTrip.png");
-  background-repeat: repeat;
+  background-attachment: fixed;
   background-size: 100%, auto;
   min-height: 600px;
   margin-top: -100px;
 }
 
-.column {
+.flex {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -240,5 +250,11 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.big-input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

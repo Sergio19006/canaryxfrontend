@@ -13,16 +13,21 @@
         <div class="rating">
           <b-icon v-for="item in 5" :key="item" icon="star" size="is-small"></b-icon>
         </div>
-        <div class="comment">
-          Lorem Ipsum is simply dummy text
-          of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard
-          dummy text ever since the 1500s, when an unknown
-          printer took a galley of type
-          and scrambled it to make a type specimen book
+        <div v-if="showReview" class="comment">{{review}} </div>
+        <div v-if="!showReview" class="comment">
+          <b-field>
+              <b-input
+                v-model="review"
+                type="textarea"
+                minlength="10"
+                maxlength="300"
+                placeholder="Add here your review"
+              ></b-input>
+            </b-field>
+            <button @click="addReview" class="button">Review</button>
         </div>
         <div class="columns response">
-          <div v-if="!show" class="column text-area">
+          <div v-if="!showResponse" class="column text-area">
             <b-field>
               <b-input
                 v-model="response"
@@ -34,12 +39,12 @@
             </b-field>
             <button @click="addResponse" class="button">Response</button>
           </div>
-          <div v-if="show" class="column is-2">
+          <div v-if="showResponse" class="column is-2">
             <figure class="image is-64x64">
               <img class="is-rounded" src="../../assets/thomas.png" />
             </figure>
           </div>
-          <div v-if="show" class="column is-10 mess">{{response}}</div>
+          <div v-if="showResponse" class="column is-10 mess">{{response}}</div>
         </div>
       </div>
     </div>
@@ -49,18 +54,22 @@
 <script>
 export default {
   props: {
-    show: Boolean,
-    response: String
+    showResponse: Boolean,
+    response: String,
+    showReview: Boolean,
+    review: String
   },
 
   data: () => {
     return {
-      //response: ""
     };
   },
   methods: {
      addResponse() {
-      this.show = true;
+      this.showResponse = true;
+    },
+    addReview(){
+      this.showReview = true;
     }
   }
 };

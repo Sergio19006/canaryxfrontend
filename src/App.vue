@@ -18,6 +18,7 @@ export default {
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 #app {
   width: 100%;
 }
@@ -75,6 +76,8 @@ $colors: (
 $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
+
+$family-primary: 'Roboto', sans-serif;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
