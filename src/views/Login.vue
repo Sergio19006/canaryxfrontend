@@ -10,7 +10,13 @@
               </header>
               <section class="modal-card-body">
                 <b-field label="Email">
-                  <b-input type="email" :value="email" placeholder="Your email" required></b-input>
+                  <b-input
+                    v-model="email"
+                    type="email"
+                    :value="email"
+                    placeholder="Your email"
+                    required
+                  ></b-input>
                 </b-field>
                 <b-field label="Password">
                   <b-input
@@ -26,7 +32,7 @@
                 </div>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-primary">Login</button>
+                <button @click="login()" class="button is-primary">Login</button>
               </footer>
             </div>
           </form>
@@ -37,7 +43,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => {
+    return {
+      email: "hjehfej@gmail.com",
+      password: "",
+      repeatPass: ""
+    };
+  },
+  methods: {
+    login() {
+      // eslint-disable-next-line
+      console.log(this.$store.state.email, "no peto");
+      // eslint-disable-next-line
+      this.$store.commit("setEmail", this.email);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

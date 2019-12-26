@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import AdminTrip from "../components/Admin/AdminTrip";
+//import AdminTrip from "../components/Admin/AdminTrip";
 import Menu from "../components/Admin/Menu";
 export default {
   components: {
-    AdminTrip,
+    //AdminTrip,
     Menu
   }
 };

@@ -62,6 +62,10 @@ export default {
         this.places.push(this.currentPlace);
         this.center = marker;
         this.currentPlace = null;
+        const trip = {
+          coordenates: marker
+        }
+        this.$store.commit('setTrip',trip);
       }
     },
     geolocate: function() {
@@ -72,7 +76,11 @@ export default {
         };
       });
     }
+  },
+  beforeDestroy(){
+    this.$store.commit('setTrip');
   }
+
 };
 </script>
 <style lang="scss" scoped>

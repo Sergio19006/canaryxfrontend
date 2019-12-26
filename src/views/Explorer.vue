@@ -24,6 +24,8 @@ export default {
     return {};
   },
 
+  mounted() {},
+
   components: {
     TripPicker,
     PrincipalsTrips

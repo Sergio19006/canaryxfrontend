@@ -7,7 +7,7 @@
             <div class="columns">
               <div class="column is-6 big-input">
                 <b-field label="Title">
-                  <b-input placeholder="e.g. Teide Trip" size="is-large"></b-input>
+                  <b-input placeholder="e.g. Teide Trip" size="is-large" v-model="title"></b-input>
                 </b-field>
               </div>
               <div class="column is-6 big-input">
@@ -19,7 +19,7 @@
                     placeholder="e.g. Walk"
                     :keep-first="true"
                     :open-on-focus="true"
-                    @select="option => selected = option"
+                    @select="option => (selected = option)"
                   >
                     <template slot="empty">No results found</template>
                   </b-autocomplete>
@@ -28,11 +28,12 @@
             </div>
             <div class="columns">
               <div class="column flex is-6">
-                <b-field label="Numbers of persons">
-                  <b-numberinput v-model="numberOfPersons" min="0"></b-numberinput>
+                <b-field label="Total Persons">
+                  <b-numberinput v-model="totalPersons" min="0"></b-numberinput>
                 </b-field>
                 <b-field label="Select time">
                   <b-clockpicker
+                    v-model="hour"
                     placeholder="Click to select..."
                     size="is-medium"
                     icon="clock"
@@ -47,7 +48,7 @@
                     placeholder="e.g. Tenerife"
                     :keep-first="true"
                     :open-on-focus="true"
-                    @select="option => selected = option"
+                    @select="option => (selected = option)"
                   >
                     <template slot="empty">No results found</template>
                   </b-autocomplete>
@@ -71,18 +72,29 @@
               </div>
             </div>
           </div>
-          <div class=" flex is-6.
-          ">
-            <div class="inline">
-              <div class="field">
-                <b-switch v-model="Transport">Transport</b-switch>
-              </div>
-              <div class="field">
-                <b-switch v-model="Lunch">Lunch</b-switch>
-              </div>
+          <div class="flex is-6">
+            <div class="inline total">
+              <b-field class="margin-left">
+                <b-switch v-model="transport">Transport</b-switch>
+              </b-field>
+              <b-field class="margin-left">
+                <b-switch v-model="lunch">Lunch</b-switch>
+              </b-field>
+              <br />
+              <b-field class="flex">
+                Description
+                <b-input
+                  class="total"
+                  v-model="description"
+                  type="textarea"
+                  minlength="10"
+                  maxlength="300"
+                  placeholder="Add here the description of the trip"
+                ></b-input>
+              </b-field>
             </div>
 
-            <b-field class="margin">
+            <b-field>
               <b-upload v-model="dropFiles" multiple drag-drop>
                 <section class="section">
                   <div class="content has-text-centered">
@@ -96,7 +108,7 @@
             </b-field>
             <div class="tags">
               <span v-for="(file, index) in dropFiles" :key="index" class="tag is-primary">
-                {{file.name}}
+                {{ file.name }}
                 <button
                   class="delete is-small"
                   type="button"
@@ -126,10 +138,9 @@
         <div class="content maps">
           <GoogleMaps />
         </div>
-        <div class="conditions margin">
-            <button class="button is-primary is-medium " @click="sendFiles()" >Add Trip</button>
+        <div class="conditions margin-bottom">
+          <button class="button is-primary is-medium" @click="sendFiles()">Add Trip</button>
         </div>
-        
       </div>
     </div>
   </div>
@@ -137,12 +148,13 @@
 
 <script>
 import GoogleMaps from "../components/Admin/GoogleMapsBusinnes";
-import axios from 'axios';
+import axios from "axios";
+import moment from "moment";
 export default {
   data() {
     return {
       types: ["Walk", "Sea", "Experience"],
-      numberOfPersons: 15,
+      totalPersons: 15,
       guide: "",
       type: "",
       selected: null,
@@ -159,12 +171,16 @@ export default {
         "Fuerteventura"
       ],
       dropFiles: [],
-      Transport: false,
-      Lunch: false,
+      transport: false,
+      lunch: false,
       condition: "",
       conditions: [],
       place: "",
-      date:""
+      date: "",
+      hour: "10:50",
+      coordenates: {},
+      title: "",
+      description: ""
     };
   },
   computed: {
@@ -202,11 +218,31 @@ export default {
       this.conditions.push(this.condition);
       this.condition = "";
     },
-    async sendFiles(){
+    async sendFiles() {
       let data = new FormData();
-      for(let img of this.dropFiles)
-        data.append('img', img, img.name);
-      await axios.post('http://localhost:3000/api/v1/trips/addTrip', data);
+      // eslint-disable-next-line
+      console.log("hey");
+      this.date = moment(this.date).format("YYYY-MM-DD");
+      this.hour = `${this.hour.getHours()}:${this.hour.getMinutes()}`;
+      data.append("transport", this.transport);
+      data.append("place", this.place);
+      data.append("type", this.type);
+      data.append("totalPersons", this.totalPersons);
+      data.append("guide", this.guide);
+      data.append("lunch", this.lunch);
+      data.append("hour", this.hour);
+      data.append("date", this.date);
+      data.append("island", this.island);
+      data.append("avgScore", 5);
+      data.append("organizator", this.$store.state.email);
+      data.append("owner", this.$store.state.email);
+      data.append("coordenates", this.$store.state.trip.coordenates);
+      data.append("conditions", this.conditions);
+      data.append("description", this.description);
+      data.append("title", this.title);
+
+      for (let img of this.dropFiles) data.append("img", img, img.name);
+      await axios.post("http://localhost:3000/api/v1/trips/addTrip", data);
     }
   },
   components: {
@@ -217,7 +253,10 @@ export default {
 
 <style lang="scss" scoped>
 .margin {
-  padding: 50px 0px 50px 0px;
+  padding: 50px 0px 0px 0px;
+}
+.margin-bottom {
+  padding-bottom: 50px;
 }
 .body {
   width: 100vw;
@@ -252,9 +291,17 @@ export default {
   flex-direction: column;
 }
 
-.big-input{
+.big-input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.total {
+  width: 100%;
+}
+
+.margin-left {
+  margin-left: 25%;
 }
 </style>
