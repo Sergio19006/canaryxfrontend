@@ -81,6 +81,10 @@ import Reviews from "../components/Trip/Reviews";
 import SimilarTrips from "../components/Trip/SimilarTrips";
 
 export default {
+  props: {
+    _id: String
+  },
+
   data: () => {
     return {
       transport: true,

@@ -20,8 +20,11 @@
             <strong>Sign up</strong>
           </a>
         </b-navbar-item>
-        <b-navbar-item tag="router-link" :to="{ path: '/login' }">
+        <b-navbar-item v-if="!loggued" tag="router-link" :to="{ path: '/login' }">
           <a class="button is-light">Log in</a>
+        </b-navbar-item>
+        <b-navbar-item v-if="loggued" @click="logOut">
+          <a class="button is-light">Log out</a>
         </b-navbar-item>
       </div>
     </template>
@@ -29,7 +32,32 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return{
+      loggued: Boolean(this.$store.state.email)
+    }
+  },
+  mounted(){
+     // eslint-disable-next-line
+      console.log(this.$store.state.email);
+    if(this.$store.state.email != "")
+      this.loggued = true;
+  },
+  methods:{
+    logOut(){
+          // eslint-disable-next-line
+      console.log(`before!`,this.$store.state.email)
+      this.loggued = false;
+      this.$store.commit('setEmail');
+       // eslint-disable-next-line
+      console.log(`after!`,this.$store.state.email)
+    },
+    updateNabvar(){
+      this.loggued = true;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

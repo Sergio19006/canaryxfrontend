@@ -53,10 +53,9 @@ export default {
   },
   methods: {
     login() {
-      // eslint-disable-next-line
-      console.log(this.$store.state.email, "no peto");
-      // eslint-disable-next-line
       this.$store.commit("setEmail", this.email);
+      this.$router.push('/');
+      window.location.reload();
     }
   }
 };

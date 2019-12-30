@@ -8,7 +8,8 @@
             <div class="content">
               <p>
                 <strong>{{title}}</strong>
-                <br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+                <br/>
+                {{description}}
               </p>
             </div>
             <nav class="level is-mobile">
@@ -27,23 +28,51 @@
 
 <script>
 export default {
+  props: {
+    id: String
+  },
+
   data() {
     return {
-      title: "El titulo tal"
+      transport: true,
+      place: "El puerto",
+      type: "Walk",
+      totalPersons: 10,
+      guide: "guide",
+      lunch: true,
+      hour: "13:00",
+      date: "2019-12-13",
+      reviews: [],
+      island: "Tenerife",
+      avgScore: 5,
+      organizator: "organizadortal@gmail.com",
+      conditions: ["tal", "cual"],
+      images: [],
+      active: true,
+      price: 10,
+      coordenates: {lat: 28.2723384, lng: -16.64250800000002}, //send this properties to the googleMapsBusiness
+      owner: "organizadortodotal@gamil.com",
+      title: "titulo tal",
+      description: "description tal"
     };
   },
 
   methods: {
     setTrip() {
-      //Aqui setear todos los rollos pa pillarlo en el newtrip
+     const trip = {}
+      for (let property in this.$data) 
+       trip[property] = this.$data[property]
+      this.$store.commit('setTrip',trip)
       this.$router.push("newtrip");
     }
+  },
+  mounted(){
+    //Mapear cada uno de los tal del data a object de la request
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 $primary: #e2725b;
 .trip {
   background-color: beige;

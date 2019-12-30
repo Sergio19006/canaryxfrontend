@@ -16,7 +16,7 @@
           experience, make money and
           have everything in the same place.
         </h2>
-        <router-link to="newtrip">
+        <router-link to="/admin">
           <button class="button is-primary is-large">Start!</button>
         </router-link>
       </div>

@@ -25,7 +25,6 @@
               </b-dropdown>
             </template>
           </b-menu-item>
-          <b-menu-item icon="cash-multiple" label="Payments" disabled></b-menu-item>
         </b-menu-item>
         <b-menu-item icon="account" label="My Account">
           <b-menu-item label="Account data"></b-menu-item>

@@ -3,20 +3,13 @@
     <div>
       <h2>Search and add a pin</h2>
       <label>
-        <gmap-autocomplete class="input"
-          @place_changed="setPlace">
-        </gmap-autocomplete>
+        <gmap-autocomplete class="input" @place_changed="setPlace"></gmap-autocomplete>
         <button class="button is-primary" @click="addMarker">Add</button>
       </label>
-      <br/>
-
+      <br />
     </div>
-    <br>
-    <gmap-map
-      :center="center"
-      :zoom="12"
-      style="width:100%;  height: 400px;"
-    >
+    <br />
+    <gmap-map :center="center" :zoom="12" style="width:100%;  height: 400px;">
       <gmap-marker
         :key="index"
         v-for="(m, index) in markers"
@@ -42,13 +35,10 @@ export default {
   },
 
   mounted() {
-    this.currentPlace = { lat: 28.2723384, lng: -16.64250800000002 };
     this.geolocate();
-    setTimeout(this.addMarker, 1);
   },
 
   methods: {
-    // receives a place object via the autocomplete component
     setPlace(place) {
       this.currentPlace = place;
     },
@@ -62,10 +52,7 @@ export default {
         this.places.push(this.currentPlace);
         this.center = marker;
         this.currentPlace = null;
-        const trip = {
-          coordenates: marker
-        }
-        this.$store.commit('setTrip',trip);
+        this.$store.commit("setCoordenates", marker);
       }
     },
     geolocate: function() {
@@ -77,15 +64,13 @@ export default {
       });
     }
   },
-  beforeDestroy(){
-    this.$store.commit('setTrip');
+  beforeDestroy() {
+    this.$store.commit("setCoordenates");
   }
-
 };
 </script>
 <style lang="scss" scoped>
-.input{
+.input {
   max-width: 30%;
 }
-
 </style>

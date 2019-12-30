@@ -11,9 +11,7 @@ export const store = new Vuex.Store({
   state: {
     email: "",
     jwt: "",
-    trip: {
-      coordenates:"",
-    }
+    trip: {}
   },
   mutations,
   plugins: [

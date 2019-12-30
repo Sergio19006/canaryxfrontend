@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar />
+    <Navbar :loggued=loggued />
     <router-view></router-view>
   </div>
 </template>
@@ -12,7 +12,23 @@ export default {
   name: "app",
   components: {
     Navbar
-  }
+  },
+  data(){
+    return{
+      loggued: Boolean(this.$store.state.email) 
+    }
+  },
+  computed: {
+    login () {
+      return Boolean(this.$store.state.email);
+    }
+  },
+  watch: {
+    login () {
+      // eslint-disable-next-line
+      console.log(`We have fruits now, yaay!`)
+    }
+  },
 };
 </script>
 
