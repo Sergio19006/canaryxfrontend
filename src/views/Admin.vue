@@ -3,9 +3,8 @@
     <div class="columns">
       <div class="column is-2">
         <Menu />
-        <button class="button is-primary">New Trip</button>
+        <button @click="addTrip()" class="button is-primary">New Trip</button>
       </div>
-      <!-- Aqui empieza el for para hacer el rollo de las tal -->
       <div ref="container" class="flex">
         <div class="columns"></div>
       </div>
@@ -17,10 +16,12 @@
 import Vue from "vue";
 import AdminTrip from "../components/Admin/AdminTrip";
 import Menu from "../components/Admin/Menu";
+import { store } from '../store';
+import router from '../routes';
 export default {
   data() {
     return {
-      ids: [],
+      ids: ["1", "2","3","4"],
     };
   },
   components: {
@@ -28,19 +29,17 @@ export default {
   },
   mounted() {
     //pillar todads las escirsiones en las que sea el owner del tipo que este conectado
-    this.ids = ["1", "2"];
-    
     for (let index = 0; index < this.ids.length; index++) {
       if (index % 4 != 0 || index == 0) {
         const trips = document.querySelector('.flex').lastElementChild;
-        // eslint-disable-next-line
-        console.log(trips)
         const trip = document.createElement("div");
         trip.classList.add("column");
         trip.classList.add("is-3");
         const ComponentClass = Vue.extend(AdminTrip);
         let instance = new ComponentClass({
-          propsData: { id: this.ids[index] }
+          propsData: { id: this.ids[index] },
+          store,
+          router
         });
         instance.$mount();
         trip.appendChild(instance.$el);
@@ -55,28 +54,22 @@ export default {
         trip.classList.add("is-3");
         const ComponentClass = Vue.extend(AdminTrip);
         let instance = new ComponentClass({
-          propsData: { id: this.ids[index] }
+          propsData: { id: this.ids[index] },
+          store,
+          router
         });
         instance.$mount();
         trip.appendChild(instance.$el);
         container.appendChild(trip);
         con.appendChild(container);
-        // eslint-disable-next-line
-        console.log(con)
       }
     }
   },
   methods: {
     addTrip() {
-      const ComponentClass = Vue.extend(AdminTrip);
-      let instance = new ComponentClass({
-        propsData: { id: this.id }
-      });
-      instance.$mount();
-      this.$refs.reviews.appendChild(instance.$el);
-      let button = document.querySelector(".review");
-      button.remove();
-      this.$refs.reviews.appendChild(button);
+      //llamada al api aqui y si funca xD
+      window.location.reload();
+
     }
   }
 };

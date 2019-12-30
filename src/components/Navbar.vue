@@ -39,8 +39,6 @@ export default {
     }
   },
   mounted(){
-     // eslint-disable-next-line
-      console.log(this.$store.state.email);
     if(this.$store.state.email != "")
       this.loggued = true;
   },

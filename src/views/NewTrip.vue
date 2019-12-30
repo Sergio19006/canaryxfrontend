@@ -33,7 +33,7 @@
                 </b-field>
                 <b-field label="Select time">
                   <b-clockpicker
-                    v-model="hour"
+                    v-model="templateHour"
                     placeholder="Click to select..."
                     size="is-medium"
                     icon="clock"
@@ -60,21 +60,13 @@
                 </b-field>
                 <b-field label="Select a date">
                   <b-datepicker
-                    v-model="date"
+                    v-model="templateDate"
                     :editable="true"
                     size="is-medium"
                     placeholder="Click to select..."
                     icon="calendar-today"
                     :first-day-of-week="1"
-                    :date-parser="dataParser"
                   ></b-datepicker>
-                  <!-- <b-datepicker
-                    v-model="date"
-                    size="is-medium"
-                    placeholder="Click to select..."
-                    icon="calendar-today"
-
-                  ></b-datepicker> -->
                 </b-field>
                 <b-field label="Price per person">
                   <b-numberinput v-model="price" min="0"></b-numberinput>
@@ -158,7 +150,6 @@
 
 <script>
 import GoogleMaps from "../components/Admin/GoogleMapsBusinnes";
-import axios from "axios";
 import moment from "moment";
 export default {
   data() {
@@ -187,29 +178,41 @@ export default {
       condition: "",
       conditions: [],
       place: "",
-      date: '',
-      hour: '',
-      coordenates: {},
+      date: "",
+      hour: "",
+      coordenates: '',
+      owner: this.$store.state.email,
       title: "",
-      description: ""
+      description: "",
+      templateDate: new Date(),
+      templateHour: new Date()
     };
   },
 
-  mounted(){
-    
-    const dateStore = this.$store.state.trip.date.split('-');
-    this.date = new Date(parseInt(dateStore[0]),parseInt(dateStore[1])-1,parseInt(dateStore[2]));
-    this.hour = new Date();
-    this.hour.setHours(parseInt(this.$store.state.trip.hour.split(':')[0]));
-    this.hour.setMinutes(parseInt(this.$store.state.trip.hour.split(':')[1]));
+  mounted() {
+    const dateStore = this.$store.state.trip.date.split("-");
+    this.templateDate = new Date(
+      parseInt(dateStore[0]),
+      parseInt(dateStore[1]) - 1,
+      parseInt(dateStore[2])
+    );
+    this.templateHour = new Date();
+    this.templateHour.setHours(
+      parseInt(this.$store.state.trip.hour.split(":")[0])
+    );
+    this.templateHour.setMinutes(
+      parseInt(this.$store.state.trip.hour.split(":")[1])
+    );
 
-    for(let property in this.$data){
-      for(let property2 in this.$store.state.trip){
-        if((property == property2) && (property2 != 'date' &&  property2 !='hour'))
-        this.$data[property] = this.$store.state.trip[property];
+    for (let property in this.$data) {
+      for (let property2 in this.$store.state.trip) {
+        if (
+          property == property2 &&
+          (property2 != "date" && property2 != "hour")
+        )
+          this.$data[property] = this.$store.state.trip[property];
       }
     }
-
   },
 
   computed: {
@@ -248,17 +251,17 @@ export default {
       this.condition = "";
     },
     async sendFiles() {
-      let data = new FormData();
-      this.date = moment(this.date).format("YYYY-MM-DD");
-      this.hour = `${this.hour.getHours()}:${this.hour.getMinutes()}`;
+      const data = new FormData();
+      this.date = moment(this.templateDate).format("YYYY-MM-DD");
+      this.hour = `${this.templateHour.getHours()}:${this.templateHour.getMinutes()}`;
+      this.coordenates = JSON.stringify(this.$store.state.trip.coordenates);
 
       for (let img of this.dropFiles) data.append("img", img, img.name);
 
       for (let property in this.$data)
-        if (property != "dropFiles") data.append(this.$data[property]);
-      // eslint-disable-next-line
-      console.log(data); //Esto no esta testeado
-      await axios.post("http://localhost:3000/api/v1/trips/addTrip", data);
+        if (property != "dropFiles")
+          data.append(property, this.$data[property]);
+      await this.$http.post("http://localhost:3000/api/v1/trips/addTrip", data);
     }
   },
   components: {

@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import App from './App.vue';
 import Buefy from 'buefy';
-import router from './routes/index';
+import router from './routes';
 import * as VueGoogleMaps from "vue2-google-maps";
+import axios from 'axios';
 import { store } from './store';
 
 Vue.use(VueGoogleMaps, {
@@ -11,6 +12,8 @@ Vue.use(VueGoogleMaps, {
     libraries: "places"
   }
 });
+
+Vue.prototype.$http = axios
 
 Vue.use(Buefy);
 Vue.config.productionTip = false;
