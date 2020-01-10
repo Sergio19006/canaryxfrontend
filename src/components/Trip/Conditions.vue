@@ -1,7 +1,6 @@
 <template>
   <div class="columns">
     <div class="column is-6 box box-color">
-      <strong> Conditions </strong> 
       <ul>
         <li class="box is-medium margin" v-for="condition in conditions" v-bind:key=condition>
           {{condition}}
@@ -9,8 +8,6 @@
       </ul>
     </div>
     <div class="column is-6 margin-left ">
-      <strong>Date: {{date}}</strong> 
-      <br>
       <div v-if="transport">
          Transport
          <b-icon

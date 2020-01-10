@@ -3,6 +3,9 @@
     <div>
       <figure class="image is-3by1 main">
         <img src="../assets/6.jpg" alt />
+        <div class="flex">
+          <button class="button is-primary is-large">Buy Trip!</button>
+        </div>
       </figure>
     </div>
     <section>
@@ -16,9 +19,7 @@
             <h2 class="subtitle">Trip to {{place}} organizated by {{owner}}</h2>
           </div>
           <div class="column">
-            <p>
-              {{description}}
-            </p>
+            <p>{{description}}</p>
           </div>
         </div>
         <Collage />
@@ -28,22 +29,25 @@
       <div class="container">
         <div class="columns books">
           <div class="column is-8">
-            <Conditions :transport = transport
-                        :place = place
-                        :type = type
-                        :totalPersons = totalPersons
-                        :guide = guide
-                        :lunch = lunch
-                        :hour = hour
-                        :date = date
-                        :island = island
-                        :participants = participants
-                        :avgScore = avgScore
-                        :organizator = organizator
-                        :conditions = conditions />
+            <h1 class="title">Conditions</h1>
+            <Conditions
+              :transport="transport"
+              :place="place"
+              :type="type"
+              :totalPersons="totalPersons"
+              :guide="guide"
+              :lunch="lunch"
+              :hour="hour"
+              :date="date"
+              :island="island"
+              :participants="participants"
+              :avgScore="avgScore"
+              :organizator="organizator"
+              :conditions="conditions"
+            />
           </div>
           <div class="column is-4">
-            <Book :d=date />
+            <Book :d="date" />
           </div>
         </div>
       </div>
@@ -51,7 +55,7 @@
     <section>
       <div class="container">
         <div class="maps">
-          <GoogleMapsClients :coordenates = coordenates />
+          <GoogleMapsClients :coordenates="coordenates" />
         </div>
       </div>
     </section>
@@ -68,11 +72,14 @@
         </div>
       </div>
     </section>
+    <div class="flex">
+      <button class="button is-primary is-large">Buy Trip!</button>
+    </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import Collage from "../components/Trip/Collage";
 import Book from "../components/Trip/Book";
 import Conditions from "../components/Trip/Conditions";
@@ -82,49 +89,50 @@ import SimilarTrips from "../components/Trip/SimilarTrips";
 
 export default {
   props: {
-    _id: String
+    id: String
   },
 
   data: () => {
     return {
       transport: true,
       place: "Teide",
-      type: 'Walk',
+      type: "Walk",
       totalPersons: 20,
       guide: "Socio",
       lunch: true,
       hour: "11:00",
-      date: '2019-10-25',
+      date: "2019-10-25",
       reviews: [],
       island: "Tenerife",
       participants: 10,
       avgScore: 5.5,
-      organizator: 'Tui',
-      conditions: ['Esto es una condicion00','Esto es otra condicion','y esta es la ultima condicion'],
+      organizator: "Tui",
+      conditions: [
+        "Esto es una condicion00",
+        "Esto es otra condicion",
+        "y esta es la ultima condicion"
+      ],
       images: [],
       price: 55,
       coordenates: { lat: 28.2723384, lng: -16.64250800000002 },
       owner: "Tui",
-      logo:"../assets/thomas.png",
+      logo: "../assets/thomas.png",
       title: "Excursionaza al teide papu",
-      description: "Descripotion ofhvgofghoi",
+      description: "Descripotion ofhvgofghoi"
     };
   },
 
-  methods:{
-    addReview(){
-      const ComponentClass = Vue.extend(Reviews)
+  methods: {
+    addReview() {
+      const ComponentClass = Vue.extend(Reviews);
       let instance = new ComponentClass({
-          propsData: { showResponse: false,
-                        showReview: false,
-                      }
-        })
-        instance.$mount();
-        this.$refs.reviews.appendChild(instance.$el);
-        let button = document.querySelector('.review');
-        button.remove();
-        this.$refs.reviews.appendChild(button);
-        
+        propsData: { showResponse: false, showReview: false }
+      });
+      instance.$mount();
+      this.$refs.reviews.appendChild(instance.$el);
+      let button = document.querySelector(".review");
+      button.remove();
+      this.$refs.reviews.appendChild(button);
     }
   },
 
@@ -151,4 +159,10 @@ export default {
   padding-top: 0px;
 }
 
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3%;
+}
 </style>

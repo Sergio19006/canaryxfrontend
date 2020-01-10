@@ -13,7 +13,7 @@
               :keep-first="true"
               :open-on-focus="true"
               icon="magnify"
-              @select="option => selected = option"
+              @select="option => place = option"
             >
               <template slot="empty">No results found</template>
             </b-autocomplete>
@@ -31,7 +31,7 @@
         <b-field label="Guests">
           <b-numberinput v-model="guest" min="0" controls-rounded></b-numberinput>
         </b-field>
-        <b-button  @click="formatDate()" class="margin-top" type="is-primary" outlined>Find a trip</b-button>
+        <b-button @click="findTrips()" class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
     </div>
   </div>
@@ -42,68 +42,36 @@ import moment from "moment";
 const thisMonth = new Date().getMonth();
 const thisYear = new Date().getFullYear();
 export default {
+  props:{
+    sendData: Function
+  },
   data() {
     return {
-      events: [
-        new Date(thisYear, thisMonth, 2),
-        new Date(thisYear, thisMonth, 6),
-        {
-          date: new Date(thisYear, thisMonth, 6),
-          type: "is-info"
-        },
-        {
-          date: new Date(thisYear, thisMonth, 8),
-          type: "is-danger"
-        },
-        {
-          date: new Date(thisYear, thisMonth, 10),
-          type: "is-success"
-        },
-        {
-          date: new Date(thisYear, thisMonth, 10),
-          type: "is-link"
-        },
-        new Date(thisYear, thisMonth, 12),
-        {
-          date: new Date(thisYear, thisMonth, 12),
-          type: "is-warning"
-        },
-        {
-          date: new Date(thisYear, thisMonth, 16),
-          type: "is-danger"
-        },
-        new Date(thisYear, thisMonth, 20),
-        {
-          date: new Date(thisYear, thisMonth, 29),
-          type: "is-success"
-        },
-        {
-          date: new Date(thisYear, thisMonth, 29),
-          type: "is-warning"
-        },
-        {
-          date: new Date(thisYear, thisMonth, 29),
-          type: "is-info"
-        }
-      ],
-      sites: ["Puerto de la Cruz", "Teno", "Taganana", "Teide"],
+      events: [new Date("2020-01-12"), new Date(thisYear, thisMonth, 6)],
+      places: ["Puerto de la Cruz", "Teno", "Taganana", "Teide"],
       name: "",
-      selected: null,
+      place: null,
       date: [],
       guest: 1
     };
   },
 
   methods: {
-    formatDate(){
+    async findTrips() {
+      const data = {
+        date: moment(this.date).format("YYYY-MM-DD"),
+        place: this.place,
+        guests: this.guest
+      };
       // eslint-disable-next-line
-      console.log(moment(this.date).format('DD-MM-YYYY'));
+      console.log(data.date);
+      this.sendData(data);
     }
   },
 
   computed: {
     filteredDataArray() {
-      return this.sites.filter(option => {
+      return this.places.filter(option => {
         return (
           option
             .toString()
@@ -153,9 +121,8 @@ h3 {
     margin-top: 25vw;
   }
 
-  .pick{
+  .pick {
     justify-content: center;
-
   }
 }
 </style>

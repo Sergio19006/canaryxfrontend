@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="columns">
-      <div class="column is-2">
+      <div class="column is-2 flex2">
         <Menu />
-        <button @click="addTrip()" class="button is-primary">New Trip</button>
+        <div class="flex2">
+          <button @click="addTrip()" class="button is-primary">New Trip</button>
+        </div>
       </div>
       <div ref="container" class="flex">
         <div class="columns"></div>
@@ -16,22 +18,29 @@
 import Vue from "vue";
 import AdminTrip from "../components/Admin/AdminTrip";
 import Menu from "../components/Admin/Menu";
-import { store } from '../store';
-import router from '../routes';
+import { store } from "../store";
+import router from "../routes";
 export default {
   data() {
     return {
-      ids: ["1", "2","3","4"],
+      ids: []
     };
   },
   components: {
     Menu
   },
-  mounted() {
-    //pillar todads las escirsiones en las que sea el owner del tipo que este conectado
+  async mounted() {
+    const owner = {
+      owner: this.$store.state.email
+    }
+    const response = await this.$http.post("http://localhost:3000/api/v1/trips/tripsByOwner",owner);
+    for(let trips of response.data){
+      this.ids.push(trips._id);
+    }
+    
     for (let index = 0; index < this.ids.length; index++) {
       if (index % 4 != 0 || index == 0) {
-        const trips = document.querySelector('.flex').lastElementChild;
+        const trips = document.querySelector(".flex").lastElementChild;
         const trip = document.createElement("div");
         trip.classList.add("column");
         trip.classList.add("is-3");
@@ -66,10 +75,12 @@ export default {
     }
   },
   methods: {
-    addTrip() {
-      //llamada al api aqui y si funca xD
+    async addTrip () {
+      const data = {
+        owner: this.$store.state.email
+      }
+      await this.$http.post("http://localhost:3000/api/v1/trips/addTrip",data);
       window.location.reload();
-
     }
   }
 };
@@ -80,8 +91,11 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  }
-  .columns:last-child {
-    margin-bottom: calc(1.5rem - 0.75rem);
-  }
+}
+.flex2 {
+  display: flex;
+  justify-items: center;
+  align-content: center;
+  flex-direction: column;
+}
 </style>

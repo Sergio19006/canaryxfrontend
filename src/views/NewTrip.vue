@@ -141,7 +141,7 @@
           <GoogleMaps />
         </div>
         <div class="conditions margin-bottom">
-          <button class="button is-primary is-medium" @click="sendFiles()">Add Trip</button>
+          <button class="button is-primary is-medium" @click="updateTrip()">Update Trip</button>
         </div>
       </div>
     </div>
@@ -173,6 +173,7 @@ export default {
         "Fuerteventura"
       ],
       dropFiles: [],
+      active: true,
       transport: false,
       lunch: false,
       condition: "",
@@ -185,7 +186,8 @@ export default {
       title: "",
       description: "",
       templateDate: new Date(),
-      templateHour: new Date()
+      templateHour: new Date(),
+      id: this.$store.state.trip.id
     };
   },
 
@@ -250,18 +252,20 @@ export default {
       this.conditions.push(this.condition);
       this.condition = "";
     },
-    async sendFiles() {
+    async updateTrip() {
       const data = new FormData();
       this.date = moment(this.templateDate).format("YYYY-MM-DD");
       this.hour = `${this.templateHour.getHours()}:${this.templateHour.getMinutes()}`;
       this.coordenates = JSON.stringify(this.$store.state.trip.coordenates);
 
-      for (let img of this.dropFiles) data.append("img", img, img.name);
+      for (let img of this.dropFiles) 
+        data.append("img", img, img.name);
 
       for (let property in this.$data)
-        if (property != "dropFiles")
+        if (property != "dropFiles" && property!= "id")
           data.append(property, this.$data[property]);
-      await this.$http.post("http://localhost:3000/api/v1/trips/addTrip", data);
+      data.append("_id",this.id);
+      await this.$http.post("http://localhost:3000/api/v1/trips/updateTrip", data);
     }
   },
   components: {

@@ -8,7 +8,7 @@
             <div class="content">
               <p>
                 <strong>{{title}}</strong>
-                <br/>
+                <br />
                 {{description}}
               </p>
             </div>
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     id: String
@@ -44,31 +43,41 @@ export default {
       hour: "13:00",
       date: "2019-12-13",
       reviews: [],
-      island: "Tenerife",
+      island: "",
       avgScore: 5,
-      organizator: "organizadortal@gmail.com",
+      organizator: "",
       conditions: ["tal", "cual"],
       images: [],
       active: true,
       price: 10,
-      coordenates: {lat: 28.2723384, lng: -16.64250800000002}, //send this properties to the googleMapsBusiness
+      coordenates: { lat: 28.2723384, lng: -16.64250800000002 },
       owner: "organizadortodotal@gamil.com",
       title: "titulo tal",
-      description: "description tal"
+      description: "description tal",
+      participants: null
     };
   },
 
   methods: {
     setTrip() {
-     const trip = {}
-      for (let property in this.$data) 
-       trip[property] = this.$data[property]
-      this.$store.commit('setTrip',trip)
+      const trip = {};
+      for (let property in this.$data) trip[property] = this.$data[property];
+      trip.id = this.id;
+      this.$store.commit("setTrip", trip);
       this.$router.push("newtrip");
     }
   },
-  mounted(){
-    //Mapear cada uno de los tal del data a object de la request
+  async mounted() {
+    const response = await this.$http.post(
+      "http://localhost:3000/api/v1/trips/tripById",
+      { id: this.id }
+    );
+    for (let property in this.$data) {
+      for (let property2 in response.data) {
+        if (property == property2)
+          this.$data[property] = response.data[property];
+      }
+    }
   }
 };
 </script>
