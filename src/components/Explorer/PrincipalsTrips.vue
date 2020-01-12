@@ -2,7 +2,7 @@
   <div class="container main">
     <div class="columns">
       <div class="column">
-        <figure @click="setTrip()" class="box">
+        <figure @click="goTrip()" class="box">
           <img src="../../assets/6.jpg" alt />
           <div class="columns">
             <div class="column is-6">
@@ -29,7 +29,8 @@ export default {
       price: 0,
       title: "",
       images: [],
-      place: ""
+      place: "",
+      trip:{}
     };
   },
   async mounted() {
@@ -37,14 +38,19 @@ export default {
       "http://localhost:3000/api/v1/trips/tripById",
       { id: this.id }
     );
-    // eslint-disable-next-line
-        console.log(response.data);
+    this.trip = response.data;
 
     for (let property in this.$data) {
       for (let property2 in response.data) {
         if (property == property2)
           this.$data[property] = response.data[property];
       }
+    }
+  },
+  methods:{
+    goTrip(){
+      this.$store.commit('setClientTrip',this.trip);
+      this.$router.push("Trip");
     }
   }
 };

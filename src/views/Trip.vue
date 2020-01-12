@@ -122,6 +122,15 @@ export default {
     };
   },
 
+  mounted() {
+    for (let property in this.$data) {
+      for (let property2 in this.$store.state.clientTrip) {
+        if (property == property2)
+          this.$data[property] = this.$store.state.clientTrip[property2];
+      }
+    }
+  },
+
   methods: {
     addReview() {
       const ComponentClass = Vue.extend(Reviews);

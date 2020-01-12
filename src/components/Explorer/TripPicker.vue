@@ -48,12 +48,26 @@ export default {
   data() {
     return {
       events: [new Date("2020-01-12"), new Date(thisYear, thisMonth, 6)],
-      places: ["Puerto de la Cruz", "Teno", "Taganana", "Teide"],
+      places: [],
       name: "",
       place: null,
       date: [],
       guest: 1
     };
+  },
+
+  async mounted(){
+  
+    const response = await this.$http.post(
+      "http://localhost:3000/api/v1/trips/findTrips"
+    );
+    for(let trip of response.data){
+      this.places.push(trip.place);
+    }
+
+    this.places = [...new Set(this.places)];
+
+
   },
 
   methods: {
@@ -63,8 +77,6 @@ export default {
         place: this.place,
         guests: this.guest
       };
-      // eslint-disable-next-line
-      console.log(data.date);
       this.sendData(data);
     }
   },
