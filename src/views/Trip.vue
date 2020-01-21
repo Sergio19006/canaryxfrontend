@@ -4,7 +4,7 @@
       <figure class="image is-3by1 main">
         <img src="../assets/6.jpg" alt />
         <div class="flex">
-          <button class="button is-primary is-large">Buy Trip!</button>
+          <button @click="buyTrip()" class="button is-primary is-large">Buy Trip!</button>
         </div>
       </figure>
     </div>
@@ -47,7 +47,7 @@
             />
           </div>
           <div class="column is-4">
-            <Book :d="date" />
+            <Book />
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@
       </div>
     </section>
     <div class="flex">
-      <button class="button is-primary is-large">Buy Trip!</button>
+      <button @click="buyTrip()" class="button is-primary is-large">Buy Trip!</button>
     </div>
   </div>
 </template>
@@ -118,7 +118,8 @@ export default {
       owner: "Tui",
       logo: "../assets/thomas.png",
       title: "Excursionaza al teide papu",
-      description: "Descripotion ofhvgofghoi"
+      description: "Descripotion ofhvgofghoi",
+      guest: 0
     };
   },
 
@@ -129,6 +130,8 @@ export default {
           this.$data[property] = this.$store.state.clientTrip[property2];
       }
     }
+
+    this.guest = this.$store.state.numberOfPersons;
   },
 
   methods: {
@@ -142,6 +145,9 @@ export default {
       let button = document.querySelector(".review");
       button.remove();
       this.$refs.reviews.appendChild(button);
+    },
+    async buyTrip() {
+      this.$router.push("/buy");
     }
   },
 

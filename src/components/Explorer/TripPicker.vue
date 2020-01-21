@@ -29,7 +29,12 @@
           </b-field>
         </div>
         <b-field label="Guests">
-          <b-numberinput v-model="guest" min="0" controls-rounded></b-numberinput>
+          <b-numberinput
+            @click.native="setNumberOfPersons()"
+            v-model="guest"
+            min="0"
+            controls-rounded
+          ></b-numberinput>
         </b-field>
         <b-button @click="findTrips()" class="margin-top" type="is-primary" outlined>Find a trip</b-button>
       </div>
@@ -42,7 +47,7 @@ import moment from "moment";
 const thisMonth = new Date().getMonth();
 const thisYear = new Date().getFullYear();
 export default {
-  props:{
+  props: {
     sendData: Function
   },
   data() {
@@ -56,18 +61,16 @@ export default {
     };
   },
 
-  async mounted(){
-  
+  async mounted() {
     const response = await this.$http.post(
       "http://localhost:3000/api/v1/trips/findTrips"
     );
-    for(let trip of response.data){
+    for (let trip of response.data) {
       this.places.push(trip.place);
     }
 
     this.places = [...new Set(this.places)];
-
-
+    this.guest = this.$store.state.numberOfPersons;
   },
 
   methods: {
@@ -78,6 +81,9 @@ export default {
         guests: this.guest
       };
       this.sendData(data);
+    },
+    setNumberOfPersons() {
+      this.$store.commit("setNumberOfPersons", this.guest);
     }
   },
 

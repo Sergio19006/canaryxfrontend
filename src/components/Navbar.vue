@@ -34,24 +34,19 @@
 <script>
 export default {
   data() {
-    return{
+    return {
       loggued: Boolean(this.$store.state.email)
-    }
+    };
   },
-  mounted(){
-    if(this.$store.state.email != "")
-      this.loggued = true;
+  mounted() {
+    if (this.$store.state.email != "") this.loggued = true;
   },
-  methods:{
-    logOut(){
-          // eslint-disable-next-line
-      console.log(`before!`,this.$store.state.email)
+  methods: {
+    logOut() {
       this.loggued = false;
-      this.$store.commit('setEmail');
-       // eslint-disable-next-line
-      console.log(`after!`,this.$store.state.email)
+      this.$store.commit("setEmail");
     },
-    updateNabvar(){
+    updateNabvar() {
       this.loggued = true;
     }
   }

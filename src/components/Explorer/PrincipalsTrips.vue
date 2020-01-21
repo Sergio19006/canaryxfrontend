@@ -30,7 +30,7 @@ export default {
       title: "",
       images: [],
       place: "",
-      trip:{}
+      trip: {}
     };
   },
   async mounted() {
@@ -47,9 +47,9 @@ export default {
       }
     }
   },
-  methods:{
-    goTrip(){
-      this.$store.commit('setClientTrip',this.trip);
+  methods: {
+    goTrip() {
+      this.$store.commit("setClientTrip", this.trip);
       this.$router.push("Trip");
     }
   }

@@ -61,7 +61,7 @@
             size="3"
           />
         </form>
-        <button class="button" @click.native="incrementStep">Buy!</button>
+        <button class="button" @click="buy()">Buy!</button>
         <p>{{message}}</p>
       </div>
       <span></span>
@@ -87,19 +87,21 @@ export default {
 
   methods: {
     buy() {
-      /*if (
+      if (
         this.number != "" &&
         this.name != "" &&
         this.expireDate != "" &&
         this.cvc != ""
       ) {
-        const data = { email: this.user, title: this.book };
-        this.$http.post("/api/users/buybook", data).then(response => {
-          this.message = "¡Comprado con éxito!";
-        });
+        const data = {
+          email: this.$store.state.email,
+          numberOfPersons: this.$store.state.numberOfPersons,
+          _id: this.$store.state.clientTrip._id
+        };
+        this.$http.post("http://localhost:3000/api/v1/users/buyTrip", data);
       } else {
         this.message = "¡Asegúrate de que todos los datos están completos!";
-      }*/
+      }
     },
     toBackCard() {
       const card = this.$el.querySelector(".card");

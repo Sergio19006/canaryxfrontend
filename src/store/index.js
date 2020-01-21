@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
     email: "",
     jwt: "",
     trip: {},
-    clientTrip: {}
+    clientTrip: {},
+    numberOfPersons: 0
   },
   mutations,
   plugins: [

@@ -1,40 +1,37 @@
 <template>
   <div id="app">
-    <Navbar :loggued=loggued />
+    <Navbar :loggued="loggued" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 
 export default {
   name: "app",
   components: {
     Navbar
   },
-  data(){
-    return{
-      loggued: Boolean(this.$store.state.email) 
-    }
+  data() {
+    return {
+      loggued: Boolean(this.$store.state.email)
+    };
   },
   computed: {
-    login () {
+    login() {
       return Boolean(this.$store.state.email);
     }
   },
   watch: {
-    login () {
-      // eslint-disable-next-line
-      console.log(`We have fruits now, yaay!`)
-    }
-  },
+    login() {}
+  }
 };
 </script>
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all";
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 #app {
   width: 100%;
 }
@@ -93,7 +90,7 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 
-$family-primary: 'Roboto', sans-serif;
+$family-primary: "Roboto", sans-serif;
 
 // Import Bulma and Buefy styles
 @import "~bulma";

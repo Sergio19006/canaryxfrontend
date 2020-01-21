@@ -10,6 +10,9 @@ export const mutations = {
   },
   setCoordenates: (state, coordenates) => {
     coordenates ? (state.trip.coordenates = coordenates) : (state.trip.coordenates = {});
+  },
+  setNumberOfPersons: (state, numberOfPersons) => {
+    numberOfPersons ? (state.numberOfPersons = numberOfPersons) : (state.numberOfPersons = 0);
   }
 };
 
