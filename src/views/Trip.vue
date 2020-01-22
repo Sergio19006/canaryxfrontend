@@ -66,9 +66,7 @@
           <div class="column is-9" ref="reviews">
             <button class="button is-primary review" @click="addReview()">Add new review</button>
           </div>
-          <div class="column is-3 similar">
-            <SimilarTrips />
-          </div>
+          <div ref="similarTrips" class="column is-3 similar"></div>
         </div>
       </div>
     </section>
@@ -123,7 +121,7 @@ export default {
     };
   },
 
-  mounted() {
+  async mounted() {
     for (let property in this.$data) {
       for (let property2 in this.$store.state.clientTrip) {
         if (property == property2)
@@ -132,6 +130,25 @@ export default {
     }
 
     this.guest = this.$store.state.numberOfPersons;
+
+    const data = {
+      type: this.$store.state.clientTrip.type,
+      _id: this.$store.state.clientTrip._id
+    };
+
+    const response = await this.$http.post(
+      "http://localhost:3000/api/v1/trips/similarTrips",
+      data
+    );
+
+    for (const trip of response.data) {
+      const ComponentClass = Vue.extend(SimilarTrips);
+      let instance = new ComponentClass({
+        propsData: { id: trip._id }
+      });
+      instance.$mount();
+      this.$refs.similarTrips.appendChild(instance.$el);
+    }
   },
 
   methods: {
@@ -155,8 +172,7 @@ export default {
     Collage,
     Book,
     Conditions,
-    GoogleMapsClients,
-    SimilarTrips
+    GoogleMapsClients
   }
 };
 </script>

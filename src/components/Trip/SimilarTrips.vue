@@ -11,8 +11,9 @@
         <div class="media-content">
           <div class="content">
             <p>
-              <strong>Teide Expirience</strong>
-              <br />Lorem ipsum dolor sit amet
+              <strong>{{title}}</strong>
+              <br />
+              {{description}}
             </p>
           </div>
         </div>
@@ -22,7 +23,31 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    id: String
+  },
+  data() {
+    return {
+      title: "",
+      description: ""
+    };
+  },
+
+  async mounted() {
+    const data = {
+      id: this.id
+    };
+
+    const response = await this.$http.post(
+      "http://localhost:3000/api/v1/trips/tripById",
+      data
+    );
+
+    this.title = response.data.title;
+    this.description = response.data.description;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
