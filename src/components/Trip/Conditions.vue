@@ -33,7 +33,7 @@ export default {
   props: {
     conditions: Array,
     date: String,
-    transport: String,
+    transport: Boolean,
     lunch: Boolean,
     type: String,
     totalPersons: Number,

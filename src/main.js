@@ -8,7 +8,7 @@ import { store } from './store';
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "",
+    key: "AIzaSyAUP-1OmioL0TjWShWRKgRR3URt3Cd2IR8",
     libraries: "places"
   }
 });

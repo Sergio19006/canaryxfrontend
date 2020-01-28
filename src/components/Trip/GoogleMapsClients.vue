@@ -15,9 +15,6 @@
 <script>
 export default {
   name: "GoogleMap",
-  props:{
-    coordenates: String
-  },
   data() {
     return {
       center: {},
@@ -28,7 +25,7 @@ export default {
   },
 
   mounted() {
-    this.currentPlace = this.coordenates;
+    this.currentPlace = JSON.parse(this.$store.state.clientTrip.coordenates);
     this.center = { lat: 28.2723384, lng: -16.64250800000002 }
     this.geolocate();
     setTimeout(this.addMarker, 100);

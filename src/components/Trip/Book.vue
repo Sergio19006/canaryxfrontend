@@ -7,7 +7,6 @@
         inline
         :editable="true"
         :first-day-of-week="1"
-        :date-parser="dataParser"
       ></b-datepicker>
     </div>
   </div>
@@ -20,16 +19,17 @@ export default {
   },
   data() {
     return {
-      date: new Date()
+      date: new Date(),
+      da:""
     };
   },
   mounted() {
-    this.d = this.$store.state.trip.date;
-    this.d = this.d.split("-");
+    this.da = this.$store.state.trip.date;
+    this.da = this.da.split("-");
     this.date = new Date(
-      parseInt(this.d[0]),
-      parseInt(this.d[1]) - 1,
-      parseInt(this.d[2])
+      parseInt(this.da[0]),
+      parseInt(this.da[1]) - 1,
+      parseInt(this.da[2])
     );
   }
 };

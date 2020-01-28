@@ -55,7 +55,7 @@
     <section>
       <div class="container">
         <div class="maps">
-          <GoogleMapsClients :coordenates="coordenates" />
+          <GoogleMapsClients />
         </div>
       </div>
     </section>
@@ -85,6 +85,9 @@ import GoogleMapsClients from "../components/Trip/GoogleMapsClients";
 import Reviews from "../components/Trip/Reviews";
 import SimilarTrips from "../components/Trip/SimilarTrips";
 
+import { store } from "../store";
+import router from "../routes";
+
 export default {
   props: {
     id: String
@@ -112,7 +115,7 @@ export default {
       ],
       images: [],
       price: 55,
-      coordenates: { lat: 28.2723384, lng: -16.64250800000002 },
+      coordenates: {},
       owner: "Tui",
       logo: "../assets/thomas.png",
       title: "Excursionaza al teide papu",
@@ -122,6 +125,7 @@ export default {
   },
 
   async mounted() {
+
     for (let property in this.$data) {
       for (let property2 in this.$store.state.clientTrip) {
         if (property == property2)
@@ -144,7 +148,10 @@ export default {
     for (const trip of response.data) {
       const ComponentClass = Vue.extend(SimilarTrips);
       let instance = new ComponentClass({
-        propsData: { id: trip._id }
+        propsData: { id: trip._id },
+        router,
+        store
+
       });
       instance.$mount();
       this.$refs.similarTrips.appendChild(instance.$el);
