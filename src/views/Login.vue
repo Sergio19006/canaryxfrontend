@@ -3,7 +3,7 @@
     <div class="body">
       <div class="columns">
         <div class="column is-4 is-offset-4">
-          <form class="form">
+          <div class="form">
             <div class="modal-card" style="width: auto">
               <header class="modal-card-head">
                 <h3 class="title">Login</h3>
@@ -21,6 +21,7 @@
                 <b-field label="Password">
                   <b-input
                     type="password"
+                    v-model="password"
                     :value="password"
                     password-reveal
                     placeholder="Your password"
@@ -35,7 +36,7 @@
                 <button @click="login()" class="button is-primary">Login</button>
               </footer>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -46,17 +47,27 @@
 export default {
   data: () => {
     return {
-      email: "hjehfej@gmail.com",
+      email: "",
       password: "",
-      repeatPass: ""
     };
   },
   methods: {
-    login() {
-      this.$store.commit("setEmail", this.email);
-      this.$router.push('/');
-      window.location.reload();
-    }
+    async login() {
+
+        const data = {
+          email: this.email,
+          password: this.password
+        }
+        
+        const response = await this.$http.post(
+        "http://localhost:3000/api/v1/users/login", data);
+
+        if(response.data != null){
+          this.$store.commit("setEmail", this.email);
+          this.$router.push('/');
+          window.location.reload();
+        }
+      } 
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <div class="body">
     <div class="columns">
       <div class="column is-4 is-offset-4">
-        <form class="form">
+        <div class="form">
           <div class="modal-card" style="width: auto">
             <header class="modal-card-head">
               <h3 class="title">Sign Up</h3>
@@ -61,7 +61,7 @@
               <button @click="singupHandle()" class="button is-primary">Sign up</button>
             </footer>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -86,14 +86,22 @@ export default {
       document.querySelector(".div-logo").classList.toggle("hidden");
     },
     async singupHandle(){
+      // eslint-disable-next-line
+      console.log("hey")
       let data = new FormData();
-      data.append('img', this.file, this.file.name);
+      if(this.file != null)
+        data.append('img', this.file, this.file.name);
+        
       data.append('business', this.business);
       data.append('email',this.email);
       data.append('password', this.password);
       data.append('repeatPPassword', this.repeatPass);
       data.append('description',this.description)
-      await axios.post('http://localhost:3000/api/v1/users/signup',data);
+      const response = await axios.post('http://localhost:3000/api/v1/users/signup',data);
+      await axios.post('http://localhost:1234/photosUsers',data);
+      // eslint-disable-next-line
+      console.log(response.data);
+      
     }
   }
 };
@@ -124,7 +132,6 @@ export default {
 }
 
 .hidden {
-  //transform: scale(0, 0);
   position: absolute;
   left: -10000px;
   top: auto;

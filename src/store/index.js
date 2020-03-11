@@ -10,7 +10,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     email: "",
-    jwt: "",
+    token: "",
     trip: {},
     clientTrip: {},
     numberOfPersons: 0

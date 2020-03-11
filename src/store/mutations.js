@@ -2,6 +2,9 @@ export const mutations = {
   setEmail: (state, email) => {
     email ? (state.email = email) : (state.email = "");
   },
+  setToken: (state, token) => {
+    token ? (state.token = token) : (state.token = "");
+  },
   setTrip: (state, trip) => {
     trip ? (state.trip = trip) : (state.trip = {});
   },

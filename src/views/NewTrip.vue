@@ -266,6 +266,7 @@ export default {
           data.append(property, this.$data[property]);
       data.append("_id",this.id);
       await this.$http.post("http://localhost:3000/api/v1/trips/updateTrip", data);
+      await this.$http.post("http://localhost:1234/photosTrip", data);
     }
   },
   components: {
