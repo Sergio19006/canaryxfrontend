@@ -86,8 +86,6 @@ export default {
       document.querySelector(".div-logo").classList.toggle("hidden");
     },
     async singupHandle(){
-      // eslint-disable-next-line
-      console.log("hey")
       let data = new FormData();
       if(this.file != null)
         data.append('img', this.file, this.file.name);
@@ -98,7 +96,8 @@ export default {
       data.append('repeatPPassword', this.repeatPass);
       data.append('description',this.description)
       const response = await axios.post('http://localhost:3000/api/v1/users/signup',data);
-      await axios.post('http://localhost:1234/photosUsers',data);
+      await axios.get('http://167.172.63.22/');
+      await axios.post('http://167.172.63.22/photosUsers',data);
       // eslint-disable-next-line
       console.log(response.data);
       
