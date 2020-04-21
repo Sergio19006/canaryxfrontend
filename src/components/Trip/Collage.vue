@@ -3,32 +3,32 @@
     <div class="grid-container">
       <div class="top-left">
         <figure class="image is-4by3">
-          <img src="../../assets/6.jpg" alt />
+          <img :src=images[0] alt />
         </figure>
       </div>
       <div class="top-rigth">
         <figure class="image is-4by3">
-          <img src="../../assets/6.jpg" alt />
+          <img :src=images[1] alt />
         </figure>
       </div>
       <div class="top-more-rigth">
         <figure class="image is-4by3">
-          <img src="../../assets/6.jpg" alt />
+          <img :src=images[2] alt />
         </figure>
       </div>
       <div class="bottom-rigth">
         <figure class="image is-4by3">
-          <img src="../../assets/6.jpg" alt />
+          <img :src=images[3] alt />
         </figure>
       </div>
       <div class="bottom-left">
         <figure class="image is-4by3">
-          <img src="../../assets/6.jpg" alt />
+          <img :src=images[4] alt />
         </figure>
       </div>
       <div class="bottom-more-left">
         <figure class="image is-4by3">
-          <img src="../../assets/6.jpg" alt />
+          <img :src=images[5] alt />
         </figure>
       </div>
     </div>
@@ -37,6 +37,10 @@
 
 <script>
 export default {
+
+  props : {
+    images: Array
+  }
   
 };
 </script>

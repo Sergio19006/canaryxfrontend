@@ -22,7 +22,7 @@
             <p>{{description}}</p>
           </div>
         </div>
-        <Collage />
+        <Collage :images="images" />
       </div>
     </section>
     <section>
@@ -156,6 +156,8 @@ export default {
       instance.$mount();
       this.$refs.similarTrips.appendChild(instance.$el);
     }
+
+    this.images = ["../../assets/1.jpg"]
   },
 
   methods: {

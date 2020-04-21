@@ -87,6 +87,8 @@ export default {
     },
     async singupHandle(){
       let data = new FormData();
+      // eslint-disable-next-line
+       console.log(process.env.VUE_APP_PHOTO_SERVICE);
       if(this.file != null)
         data.append('img', this.file, this.file.name);
         
@@ -95,11 +97,11 @@ export default {
       data.append('password', this.password);
       data.append('repeatPPassword', this.repeatPass);
       data.append('description',this.description)
-      const response = await axios.post('http://localhost:3000/api/v1/users/signup',data);
-      await axios.get('http://167.172.63.22/');
-      await axios.post('http://167.172.63.22/photosUsers',data);
+      const response = await axios.post(`${process.env.VUE_APP_API}/api/v1/users/signup`,data);
+      await axios.post(`${process.env.VUE_APP_PHOTO_SERVICE}/photosUsers`,data);
       // eslint-disable-next-line
       console.log(response.data);
+      
       
     }
   }
