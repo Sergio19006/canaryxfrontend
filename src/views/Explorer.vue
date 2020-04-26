@@ -42,7 +42,7 @@ export default {
   methods: {
     async getQuery(query) {
       const response = await this.$http.post(
-        "http://localhost:3000/api/v1/trips/findTrips",
+       `${process.env.VUE_APP_API}/api/v1/trips/findTrips`,
         query
       );
       const flex = document.querySelector(".flex");

@@ -98,7 +98,7 @@ export default {
           numberOfPersons: this.$store.state.numberOfPersons,
           _id: this.$store.state.clientTrip._id
         };
-        this.$http.post("http://localhost:3000/api/v1/users/buyTrip", data);
+        this.$http.post(`${process.env.VUE_APP_API}/api/v1/users/buyTrip`, data);
       } else {
         this.message = "¡Asegúrate de que todos los datos están completos!";
       }

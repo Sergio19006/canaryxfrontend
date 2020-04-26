@@ -60,7 +60,7 @@ export default {
         }
         
         const response = await this.$http.post(
-        "http://localhost:3000/api/v1/users/login", data);
+        `${process.env.VUE_APP_API}/api/v1/users/login`, data);
 
         if(response.data != null){
           this.$store.commit("setEmail", this.email);

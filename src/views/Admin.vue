@@ -33,7 +33,7 @@ export default {
     const owner = {
       owner: this.$store.state.email
     }
-    const response = await this.$http.post("http://localhost:3000/api/v1/trips/tripsByOwner",owner);
+    const response = await this.$http.post(`${process.env.VUE_APP_API}/api/v1/trips/tripsByOwner`,owner);
     for(let trips of response.data){
       this.ids.push(trips._id);
     }
@@ -79,7 +79,7 @@ export default {
       const data = {
         owner: this.$store.state.email
       }
-      await this.$http.post("http://localhost:3000/api/v1/trips/addTrip",data);
+      await this.$http.post(`${process.env.VUE_APP_API}/api/v1/trips/addTrip`,data);
       window.location.reload();
     }
   }
