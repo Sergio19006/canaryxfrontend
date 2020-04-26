@@ -63,7 +63,7 @@ export default {
 
   async mounted() {
     const response = await this.$http.post(
-      "http://localhost:3000/api/v1/trips/findTrips"
+      `${process.env.VUE_APP_API}/api/v1/trips/findTrips`
     );
     for (let trip of response.data) {
       this.places.push(trip.place);

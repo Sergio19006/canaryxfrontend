@@ -42,7 +42,7 @@ export default {
     };
 
     const response = await this.$http.post(
-      "http://localhost:3000/api/v1/trips/tripById",
+      `${process.env.VUE_APP_API}/api/v1/trips/tripById`,
       data
     );
   
