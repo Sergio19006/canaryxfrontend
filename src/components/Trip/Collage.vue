@@ -3,32 +3,32 @@
     <div class="grid-container">
       <div class="top-left">
         <figure class="image is-4by3">
-          <img :src=images[0] alt />
+          <img v-bind:src=fImage alt />
         </figure>
       </div>
       <div class="top-rigth">
         <figure class="image is-4by3">
-          <img :src=images[1] alt />
+          <img v-bind:src=sImage alt />
         </figure>
       </div>
       <div class="top-more-rigth">
         <figure class="image is-4by3">
-          <img :src=images[2] alt />
+          <img v-bind:src=tImage alt />
         </figure>
       </div>
       <div class="bottom-rigth">
         <figure class="image is-4by3">
-          <img :src=images[3] alt />
+          <img v-bind:src=foImage alt />
         </figure>
       </div>
       <div class="bottom-left">
         <figure class="image is-4by3">
-          <img :src=images[4] alt />
+          <img v-bind:src=ffImage alt />
         </figure>
       </div>
       <div class="bottom-more-left">
         <figure class="image is-4by3">
-          <img :src=images[5] alt />
+          <img v-bind:src=siImage alt />
         </figure>
       </div>
     </div>
@@ -40,6 +40,27 @@ export default {
 
   props : {
     images: Array
+  },
+
+  data: () => {
+    return{
+      fImage: "",
+      sImage: "",
+      tImage: "",
+      foImage: "",
+      ffImage: "",
+      siImage: ""
+    }
+  },
+
+  mounted(){
+    this.fImage = this.images[0];
+    this.sImage = this.images[1];
+    this.tImage = this.images[2];
+    this.foImage = this.images[3];
+    this.ffImage = this.images[4];
+    this.siImage = this.images[5];
+
   }
   
 };

@@ -22,7 +22,7 @@
             <p>{{description}}</p>
           </div>
         </div>
-        <Collage :images="images" />
+        <Collage v-if="renderCollage" :images="images" />
       </div>
     </section>
     <section>
@@ -44,6 +44,7 @@
               :avgScore="avgScore"
               :organizator="organizator"
               :conditions="conditions"
+              :price="price"
             />
           </div>
           <div class="column is-4">
@@ -120,7 +121,8 @@ export default {
       logo: "../assets/thomas.png",
       title: "Excursionaza al teide papu",
       description: "Descripotion ofhvgofghoi",
-      guest: 0
+      guest: 0,
+      renderCollage: false
     };
   },
 
@@ -132,6 +134,8 @@ export default {
           this.$data[property] = this.$store.state.clientTrip[property2];
       }
     }
+    
+    this.renderCollage = true;
 
     this.guest = this.$store.state.numberOfPersons;
 

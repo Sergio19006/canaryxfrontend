@@ -69,6 +69,7 @@
 
 <script>
 import axios from 'axios';
+import { asyncWrap } from '../utils';
 export default {
   data: () => {
     return {
@@ -87,22 +88,26 @@ export default {
     },
     async singupHandle(){
       let data = new FormData();
-      // eslint-disable-next-line
-       console.log(process.env.VUE_APP_PHOTO_SERVICE);
+      
       if(this.file != null)
         data.append('img', this.file, this.file.name);
-        
-      data.append('business', this.business);
+
+      data.append('business', this.business.toString());
       data.append('email',this.email);
       data.append('password', this.password);
       data.append('repeatPPassword', this.repeatPass);
       data.append('description',this.description)
-      const response = await axios.post(`${process.env.VUE_APP_API}/api/v1/users/signup`,data);
-      await axios.post(`${process.env.VUE_APP_PHOTO_SERVICE}/photosUsers`,data);
-      // eslint-disable-next-line
-      console.log(response.data);
-      
-      
+
+      const [err,response] = await asyncWrap(axios.post(`${process.env.VUE_APP_API}/api/v1/users/signup`,data));
+      if(err)
+        // eslint-disable-next-line
+       console.log(err);
+       else
+        // eslint-disable-next-line
+       console.log(response);
+       this.$router.push('/');
+
+      //await axios.post(`${process.env.VUE_APP_PHOTO_SERVICE}/photosUsers`,data);  
     }
   }
 };

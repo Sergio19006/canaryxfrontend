@@ -41,6 +41,10 @@
         </div>
       </div>
       <div class="form">
+        <h2 class="breakcown">Breakdown</h2>
+        <h2 class="breakcown">Price: {{price}}€</h2>
+        <h2 class="breakcown">persons: {{persons}}</h2>
+        <h2 class="title">Total to pay: {{price * persons }}€</h2>
         <form>
           <b-input
             v-model="number"
@@ -80,10 +84,18 @@ export default {
       cvc: "",
       message: "",
       user: "",
-      step: 0
+      step: 0,
+      price: 0,
+      persons: 0,
+      
     };
   },
-  async mounted() {},
+  async mounted() {
+    // eslint-disable-next-line
+    this.price = this.$store.state.clientTrip.price;
+    this.persons = this.$store.state.numberOfPersons;
+
+  },
 
   methods: {
     buy() {
@@ -160,7 +172,7 @@ span {
   padding: 0.5rem 1rem;
   background-color: transparent;
   text-align: center;
-  margin-top: 5.5rem;
+  margin-top: 2.5rem;
   margin-bottom: 1.5rem;
   width: 400px;
   height: 100%;
@@ -329,5 +341,9 @@ input::placeholder {
 .card:hover .card__back,
 .emulateHover .card__back {
   transform: rotateY(0deg);
+}
+
+.breakcown{
+  font-size: 2vh;
 }
 </style>

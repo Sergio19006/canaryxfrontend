@@ -1,0 +1,1 @@
+export const asyncWrap = Promise => Promise.then(result => [null, result]).catch(err => [err]);

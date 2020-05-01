@@ -24,6 +24,7 @@
       <strong>Persons: {{participants}}/{{totalPersons}}</strong>
       <strong>Hour: {{hour}}</strong>
       <strong>Type: {{type}}</strong>
+      <strong>Price/per person: {{price}}€</strong>
     </div>
   </div>
 </template>
@@ -42,7 +43,8 @@ export default {
     island: String,
     participants: Number,
     avgScore: Number,
-    organizator: String
+    organizator: String,
+    price: Number
   }
 };
 </script>
