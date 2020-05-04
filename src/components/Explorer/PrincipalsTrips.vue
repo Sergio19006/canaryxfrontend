@@ -1,5 +1,5 @@
 <template>
-  <div class="container main">
+  <div class="container main" ref="main">
     <div class="columns">
       <div class="column">
         <figure @click="goTrip()" class="box">
@@ -22,7 +22,8 @@
 <script>
 export default {
   props: {
-    id: String
+    id: String,
+    filter: String
   },
   data: () => {
     return {
@@ -30,7 +31,8 @@ export default {
       title: "",
       images: [],
       place: "",
-      trip: {}
+      trip: {},
+      image: "",
     };
   },
   async mounted() {
@@ -46,7 +48,9 @@ export default {
           this.$data[property] = response.data[property];
       }
     }
+
     this.image = this.images[0];
+
   },
   methods: {
     goTrip() {

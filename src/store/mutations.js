@@ -8,6 +8,9 @@ export const mutations = {
   setTrip: (state, trip) => {
     trip ? (state.trip = trip) : (state.trip = {});
   },
+  setQuery: (state, query) => {
+    query ? (state.query = query) : (state.query = {});
+  },
   setClientTrip: (state, trip) => {
     trip ? (state.clientTrip = trip) : (state.clientTrip = {});
   },

@@ -75,12 +75,14 @@ export default {
 
   methods: {
     async findTrips() {
-      const data = {
+      const query = {
         date: moment(this.date).format("YYYY-MM-DD"),
         place: this.place,
         guests: this.guest
       };
-      this.sendData(data);
+      this.$store.commit("setQuery",query);
+      var event = new CustomEvent("filter");
+      window.dispatchEvent(event);
     },
     setNumberOfPersons() {
       this.$store.commit("setNumberOfPersons", this.guest);

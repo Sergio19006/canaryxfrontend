@@ -21,7 +21,8 @@ import Vue from "vue";
 export default {
   data() {
     return {
-      ids: []
+      ids: [],
+      trips: {}
     };
   },
 
@@ -29,70 +30,92 @@ export default {
     const response = await this.$http.post(
       `${process.env.VUE_APP_API}/api/v1/trips/findTrips`
     );
-    
+
     for (let trip of response.data) {
       this.ids.push(trip._id);
     }
+
+    this.trips = response.data;
+
     this.createTrips();
+
+    window.addEventListener("filter", () => {
+      this.getQuery();
+    });
   },
 
   components: {
     TripPicker
   },
   methods: {
-    async getQuery(query) {
-      const response = await this.$http.post(
-       `${process.env.VUE_APP_API}/api/v1/trips/findTrips`,
-        query
-      );
+    async getQuery() {
+      const query = this.$store.state.query;
       const flex = document.querySelector(".flex");
       let child = flex.lastElementChild;
       while (child) {
         flex.removeChild(child);
         child = flex.lastElementChild;
       }
-      for (let trip of response.data) this.ids.push(trip._id);
-
-      this.createTrips();
+      this.createTrips(query);
     },
-    createTrips() {
+
+    createTrips(query) {
+      let indexFlex = 0;
+
       for (let index = 0; index < this.ids.length; index++) {
-        if (index % 3 != 0) {
-          const trips = document.querySelector(".flex").lastElementChild;
-          const trip = document.createElement("div");
-          trip.classList.add("column");
-          trip.classList.add("is-4");
-          const ComponentClass = Vue.extend(PrincipalsTrips);
-          
-          let instance = new ComponentClass({
-            propsData: { id: this.ids[index] },
-            store,
-            router
-          });
-          instance.$mount();
-          trip.appendChild(instance.$el);
-          trips.appendChild(trip);
-        }
-        if (index % 3 == 0 || index == 0) {
-          const con = this.$refs.container;
-          const container = document.createElement("div");
-          container.classList.add("columns");
-          const trip = document.createElement("div");
-          trip.classList.add("column");
-          trip.classList.add("is-4");
-          const ComponentClass = Vue.extend(PrincipalsTrips);
-          let instance = new ComponentClass({
-            propsData: { id: this.ids[index] },
-            store,
-            router
-          });
-          instance.$mount();
-          trip.appendChild(instance.$el);
-          container.appendChild(trip);
-          con.appendChild(container);
+        if (query != undefined) {
+            if(query.place.includes(this.trips[index].place)){
+              this.checkLayout(indexFlex,index);
+              indexFlex++;
+            }   
+        } 
+        else {
+          this.checkLayout(indexFlex,index);
+          indexFlex++;
         }
       }
-      this.ids = [];
+    },
+    createTrip(index, filter) {
+      const trips = document.querySelector(".flex").lastElementChild;
+      const trip = document.createElement("div");
+      trip.classList.add("column");
+      trip.classList.add("is-4");
+      const ComponentClass = Vue.extend(PrincipalsTrips);
+
+      let instance = new ComponentClass({
+        propsData: { id: this.ids[index], filter: filter },
+        store,
+        router
+      });
+      instance.$mount();
+      trip.appendChild(instance.$el);
+      trips.appendChild(trip);
+    },
+
+    createTripColumn(index,filter) {
+      const con = this.$refs.container;
+      const container = document.createElement("div");
+      container.classList.add("columns");
+      const trip = document.createElement("div");
+      trip.classList.add("column");
+      trip.classList.add("is-4");
+      const ComponentClass = Vue.extend(PrincipalsTrips);
+      let instance = new ComponentClass({
+        propsData: { id: this.ids[index], filter: filter },
+        store,
+        router
+      });
+      instance.$mount();
+      trip.appendChild(instance.$el);
+      container.appendChild(trip);
+      con.appendChild(container);
+    },
+
+    checkLayout(indexFlex,index,filter){
+      if (indexFlex % 3 != 0) 
+        this.createTrip(index,filter);
+      if (indexFlex % 3 == 0 || indexFlex == 0)
+        this.createTripColumn(index,filter);
     }
   }
 };
