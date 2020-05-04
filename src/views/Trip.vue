@@ -4,7 +4,7 @@
       <figure class="image is-3by1 main">
         <img src="../assets/6.jpg" alt />
         <div class="flex">
-          <button @click="buyTrip()" class="button is-primary is-large">Buy Trip!</button>
+          <button @click="buyTrip()" class="button is-primary is-large">Buy trip from <strong> {{price}}€ </strong> </button>
         </div>
       </figure>
     </div>
@@ -13,7 +13,7 @@
         <div class="columns">
           <div class="column is-5 trip-title">
             <figure class="image is-64x64">
-              <img class="is-rounded" src="../assets/thomas.png" />
+              <img class="is-rounded" :src="logo" />
             </figure>
             <h1 class="title">{{title}}</h1>
             <h2 class="subtitle">Trip to {{place}} organizated by {{owner}}</h2>
@@ -132,11 +132,11 @@ export default {
       for (let property2 in this.$store.state.clientTrip) {
         if (property == property2)
           this.$data[property] = this.$store.state.clientTrip[property2];
+         
       }
     }
     
     this.renderCollage = true;
-
     this.guest = this.$store.state.numberOfPersons;
 
     const data = {
@@ -148,6 +148,16 @@ export default {
       `${process.env.VUE_APP_API}/api/v1/trips/similarTrips`,
       data
     );
+
+      const dataUser = {
+      email: this.owner
+    };
+
+    const responseUser = await this.$http.post(
+      `${process.env.VUE_APP_API}/api/v1/users/findUser`,
+      dataUser
+    );
+    this.logo = responseUser.data.logo;
 
     for (const trip of response.data) {
       const ComponentClass = Vue.extend(SimilarTrips);

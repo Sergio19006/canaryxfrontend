@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" ref="container">
     <div class="trip">
       <div class="box">
         <img src="../../assets/teide.jpg" alt />
@@ -16,6 +16,11 @@
               <div class="level-left">
                 <span @click="setTrip()" class="level-item" aria-label="reply">
                   <b-icon icon="pencil"></b-icon>
+                </span>
+              </div>
+              <div class="level-right">
+                <span @click="deleteTrip()" class="level-item" aria-label="reply">
+                  <b-icon icon="delete"></b-icon>
                 </span>
               </div>
             </nav>
@@ -65,6 +70,16 @@ export default {
       trip.id = this.id;
       this.$store.commit("setTrip", trip);
       this.$router.push("newtrip");
+    },
+    async deleteTrip() {
+      const trip = {};
+      for (let property in this.$data) trip[property] = this.$data[property];
+      trip.id = this.id;
+      await this.$http.post(
+      `${process.env.VUE_APP_API}/api/v1/trips/removeTrip`,
+      { id: this.id });
+      this.$refs.container.style.display="none";
+      window.location.reload();
     }
   },
   async mounted() {

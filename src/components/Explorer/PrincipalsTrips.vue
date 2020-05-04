@@ -3,7 +3,7 @@
     <div class="columns">
       <div class="column">
         <figure @click="goTrip()" class="box">
-          <img src="../../assets/6.jpg" alt />
+          <img :src="image" alt />
           <div class="columns">
             <div class="column is-6">
               <h1 class="title">{{title}}</h1>
@@ -46,6 +46,7 @@ export default {
           this.$data[property] = response.data[property];
       }
     }
+    this.image = this.images[0];
   },
   methods: {
     goTrip() {

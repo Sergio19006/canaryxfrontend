@@ -107,7 +107,7 @@ export default {
        console.log(response);
        this.$router.push('/');
 
-      //await axios.post(`${process.env.VUE_APP_PHOTO_SERVICE}/photosUsers`,data);  
+      await axios.post(`${process.env.VUE_APP_PHOTO_SERVICE}/photosUsers`,data);  
     }
   }
 };
