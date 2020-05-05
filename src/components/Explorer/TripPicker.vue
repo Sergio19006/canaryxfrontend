@@ -2,7 +2,7 @@
   <div class="book">
     <div class="card">
       <div class="card-content">
-        <h3 class="title">Book unique places to do an anforgettable trip.</h3>
+        <h3 class="title">Book unique places to do an unforgattable trip.</h3>
         <div>
           <b-field label="Where">
             <b-autocomplete
@@ -29,7 +29,7 @@
           </b-field>
         </div>
         <b-field label="Guests">
-          <b-numberinput
+          <b-numberinput class="selector-guest"
             @click.native="setNumberOfPersons()"
             v-model="guest"
             min="0"

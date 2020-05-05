@@ -151,6 +151,7 @@
 <script>
 import GoogleMaps from "../components/Admin/GoogleMapsBusinnes";
 import moment from "moment";
+import { getRamdomName } from '../utils';
 export default {
   data() {
     return {
@@ -259,7 +260,7 @@ export default {
       this.coordenates = JSON.stringify(this.$store.state.trip.coordenates);
 
       for (let img of this.dropFiles) 
-        data.append("img", img, img.name);
+        data.append("img", img, getRamdomName() + img.name.split('.'[1]));
 
       for (let property in this.$data)
         if (property != "dropFiles" && property!= "id")

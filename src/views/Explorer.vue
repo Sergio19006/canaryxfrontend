@@ -125,7 +125,7 @@ export default {
 .body {
   width: 100vw;
   height: 45vw;
-  background-image: url("../assets/teide.jpg");
+  background-image: url("../assets/image0.jpeg");
   background-repeat: no-repeat;
   background-size: 100%, auto;
   min-height: 600px;

@@ -69,7 +69,7 @@
 
 <script>
 import axios from 'axios';
-import { asyncWrap } from '../utils';
+import { asyncWrap, getRamdomName } from '../utils';
 export default {
   data: () => {
     return {
@@ -90,7 +90,7 @@ export default {
       let data = new FormData();
       
       if(this.file != null)
-        data.append('img', this.file, this.file.name);
+        data.append('img', this.file, getRamdomName()+this.file.name.split('.'[1]));
 
       data.append('business', this.business.toString());
       data.append('email',this.email);
