@@ -8,12 +8,15 @@ describe('My First Test', () => {
 })
 
 describe('Test users', () => {
-  it('Visits the app root url', () => {
+  it('Check counter guest working properly', () => {
     cy.visit('http://localhost:8080')
+
     cy.get('.selector-guest').find('input').invoke('val')
-      .then(sometext => expect(sometext).to.be.equal("1"));
+      .then(value => expect(value).to.be.equal("1"));
+
     cy.get('.selector-guest').find('.button').first().click();
+
     cy.get('.selector-guest').find('input').invoke('val')
-      .then(sometext => expect(sometext).to.be.equal("0"));
+      .then(value => expect(value).to.be.equal("0"));
   })
 })
