@@ -10,7 +10,7 @@
     "test:unit": "vue-cli-service test:unit --require mock-local-storage"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "buefy": "^0.8.15",
     "core-js": "^2.6.11",
     "moment": "^2.24.0",
